@@ -129,11 +129,10 @@ logs/                    # local run outputs (gitignored)
 
 Placeholder until a DOI or venue is fixed:
 
-> Author Name. (2026). *Reliability & Fallback Design Patterns for Multi-Agent
+> Muhammad Ashar. (2026). *Reliability & Fallback Design Patterns for Multi-Agent
 > LLM Systems*. Preprint; workshop submission pending.
 
-See also [`CITATION.cff`](CITATION.cff). Update the author fields before you
-publish.
+See also [`CITATION.cff`](CITATION.cff).
 
 ---
 
