@@ -3,8 +3,8 @@ message: "If you use this software or draft, please cite it as below."
 title: "Reliability & Fallback Design Patterns for Multi-Agent LLM Systems"
 type: software
 authors:
-  - family-names: "[Last]"
-    given-names: "[First]"
+  - family-names: Ashar
+    given-names: Muhammad
 abstract: >-
   Controlled comparison of fallback strategies (no fallback, blind retry,
   tool-grounded retry, deterministic checkpointing, graceful degradation,
@@ -24,7 +24,7 @@ preferred-citation:
   type: article
   title: "Reliability & Fallback Design Patterns for Multi-Agent LLM Systems"
   authors:
-    - family-names: "[Last]"
-      given-names: "[First]"
+    - family-names: Ashar
+      given-names: Muhammad
   year: 2026
   notes: "Preprint; workshop submission pending"
