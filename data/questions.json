@@ -1,0 +1,1430 @@
+[
+  {
+    "id": "5a70eee85542994082a3e3f0",
+    "question": "Which group of people in West Africa with significant populations in Ghana, Ivory Coast, Liberia and Sierra Leone use the Ida?",
+    "gold_answer": "The Yoruba",
+    "supporting_doc_ids": [
+      "doc_001_ida_sword",
+      "doc_002_yoruba_people"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Ida (sword)",
+        "sent_id": 1
+      },
+      {
+        "title": "Yoruba people",
+        "sent_id": 0
+      },
+      {
+        "title": "Yoruba people",
+        "sent_id": 6
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_001_ida_sword",
+        "title": "Ida (sword)",
+        "text": "The Ida is a kind of sword used by the Yoruba people of West Africa.  It is a long sword with a narrow to wide blade and sheathe.  The sword is sharp, and cuts on contact but typically begins to dull if not sharpened regularly.  It can be single-edged or double-edged.  These blades are typically heavier by the tip of the blade."
+      },
+      {
+        "doc_id": "doc_002_yoruba_people",
+        "title": "Yoruba people",
+        "text": "The Yoruba share borders with the Bariba to the northwest in Benin, the Nupe to the north and the Ebira to the northeast in central Nigeria.  To the east are the Edo, Ẹsan and the Afemai groups in mid-western Nigeria.  Adjacent to the Ebira and Edo groups are the related Igala people found in the northeast, on the left bank of the Niger River.  To the southwest are the Gbe speaking Mahi, Egun, Fon and Ewe who border Yoruba communities in Benin and Togo.  To the southeast are Itsekiri who live in the north-west end of the Niger delta.  They are ancestrally related to the Yoruba but chose to maintain a distinct cultural identity.  Significant Yoruba populations in other West African countries can be found in Ghana, Ivory Coast, Liberia and Sierra Leone."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a70f0a75542994082a3e403",
+    "question": "Which dialect spoken in the province of Scania calls Spettekaka, \"spiddekaga\"?",
+    "gold_answer": "Scanian dialects",
+    "supporting_doc_ids": [
+      "doc_003_spettekaka",
+      "doc_004_scanian_dialect"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Spettekaka",
+        "sent_id": 0
+      },
+      {
+        "title": "Scanian dialect",
+        "sent_id": 0
+      },
+      {
+        "title": "Scanian dialect",
+        "sent_id": 1
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_003_spettekaka",
+        "title": "Spettekaka",
+        "text": "Spettekaka or spettkaka (\"spiddekaga\" in native Scanian) is a local dessert of the southern parts of Sweden, chiefly in the province of Scania (Skåne) but also in Halland.  It is an important part of the Scanian culinary heritage.  The name means \"cake on a spit\", and this describes the method of preparation: it is the Swedish variation on the spit cake."
+      },
+      {
+        "doc_id": "doc_004_scanian_dialect",
+        "title": "Scanian dialect",
+        "text": "Scanian (   ) is a closely related group of South Swedish dialects spoken in the province of Scania in southern Sweden.  Scanian formed part of the old Scandinavian dialect continuum and are by most historical linguists considered to be an East Danish dialect group, but due to the modern-era influence from Standard Swedish in the region and because traditional dialectology in the Scandinavian countries normally has not considered isoglosses that cut across state borders, the Scanian dialects have normally been treated as a South Swedish dialect group in Swedish dialect research.  However, many of the early Scandinavian linguists, including Adolf Noreen and G. Sjöstedt, classified it as \"South Scandinavian\", and some linguists, such as Elias Wessén, also considered Old Scanian a separate language, classified apart from both Old Danish and Old Swedish."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a70f1685542994082a3e40f",
+    "question": "Which piece did Ludwig van Beethoven publish in 1801 that was dedicated to Count Moritz von Fries? ",
+    "gold_answer": "Symphony No. 7",
+    "supporting_doc_ids": [
+      "doc_005_violin_sonata_no_5_beethoven",
+      "doc_006_symphony_no_7_beethoven"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Violin Sonata No. 5 (Beethoven)",
+        "sent_id": 0
+      },
+      {
+        "title": "Symphony No. 7 (Beethoven)",
+        "sent_id": 0
+      },
+      {
+        "title": "Symphony No. 7 (Beethoven)",
+        "sent_id": 1
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_005_violin_sonata_no_5_beethoven",
+        "title": "Violin Sonata No. 5 (Beethoven)",
+        "text": "The Violin Sonata No. 5 in F major, Opus 24, is a violin sonata by Ludwig van Beethoven.  It is often known as the \"Spring Sonata\" (\"Frühlingssonate\"), and was published in 1801.  Its dedicatee was Count Moritz von Fries, a patron to whom Beethoven also dedicated two other works of the same year—the C major string quintet and the fourth violin sonata—as well as his later seventh symphony."
+      },
+      {
+        "doc_id": "doc_006_symphony_no_7_beethoven",
+        "title": "Symphony No. 7 (Beethoven)",
+        "text": "The Symphony No. 7 in A major, Op. 92, is a symphony in four movements composed by Ludwig van Beethoven between 1811 and 1812, while improving his health in the Bohemian spa town of Teplice.  The work is dedicated to Count Moritz von Fries."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a70f39c5542994082a3e429",
+    "question": "What is the name of the independent candidate in Maine's 2010 gubernatorial race who finished ahead of Libby Mitchell?",
+    "gold_answer": "Eliot Cutler",
+    "supporting_doc_ids": [
+      "doc_007_libby_mitchell",
+      "doc_008_eliot_cutler"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Libby Mitchell",
+        "sent_id": 0
+      },
+      {
+        "title": "Libby Mitchell",
+        "sent_id": 2
+      },
+      {
+        "title": "Eliot Cutler",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_007_libby_mitchell",
+        "title": "Libby Mitchell",
+        "text": "Elizabeth H. \"Libby\" Mitchell (born Elizabeth Anne Harrill on June 22, 1940) is an American politician from Maine.  Mitchell, a Democrat, represented part of Kennebec County in the Maine Senate from 2004 to 2010.  Mitchell was also the Democrats' 2010 candidate for the office of Governor of Maine.  She finished in third place behind Republican Paul LePage and unenrolled attorney Eliot Cutler.  She is the only woman in United States history to have been elected as both speaker of her state house of representatives and president of her state senate."
+      },
+      {
+        "doc_id": "doc_008_eliot_cutler",
+        "title": "Eliot Cutler",
+        "text": "Eliot Cutler (born July 29, 1946) is an American lawyer who was an Independent candidate in Maine's 2010 and 2014 gubernatorial races."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a70f4c45542994082a3e437",
+    "question": "Which Italian-American composer and librettist wrote the English language opera, Maria Golovin?",
+    "gold_answer": "Gian Carlo Menotti",
+    "supporting_doc_ids": [
+      "doc_009_maria_golovin",
+      "doc_010_gian_carlo_menotti"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Maria Golovin",
+        "sent_id": 0
+      },
+      {
+        "title": "Gian Carlo Menotti",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_009_maria_golovin",
+        "title": "Maria Golovin",
+        "text": "Maria Golovin is an English language opera in three acts by Gian Carlo Menotti.  It is through-composed and centers on a romantic encounter between a blind recluse named Donato and the title character, a married woman living in a European country a few years after a recent war.  The work was commissioned by Peter Herman Adler of the NBC Opera Theatre."
+      },
+      {
+        "doc_id": "doc_010_gian_carlo_menotti",
+        "title": "Gian Carlo Menotti",
+        "text": "Gian Carlo Menotti (] ; July 7, 1911 – February 1, 2007) was an Italian-American composer and librettist.  Although he often referred to himself as an American composer, he kept his Italian citizenship.  He wrote the classic Christmas opera \"Amahl and the Night Visitors\", along with over two dozen other operas intended to appeal to popular taste."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a70f6425542994082a3e44c",
+    "question": "Renamed in 2014, what was the vehicle offered as a prize to contestants on the first season of The Amazing Race Canada?",
+    "gold_answer": "Chevrolet Corvette Stingrays",
+    "supporting_doc_ids": [
+      "doc_011_the_amazing_race_canada_1",
+      "doc_012_chevrolet_corvette_c7"
+    ],
+    "supporting_facts": [
+      {
+        "title": "The Amazing Race Canada 1",
+        "sent_id": 1
+      },
+      {
+        "title": "Chevrolet Corvette (C7)",
+        "sent_id": 1
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_011_the_amazing_race_canada_1",
+        "title": "The Amazing Race Canada 1",
+        "text": "The first season of The Amazing Race Canada was a reality game show based on the American series \"The Amazing Race\".  It featured nine teams of two with pre-existing relationships who raced around Canada for CA$ , two Chevrolet Corvette Stingrays and an unlimited air travel for a year with Air Canada.  The show was produced by Insight Productions, in association with Bell Media and was broadcast on CTV.  The show was hosted by Canadian Olympian Jon Montgomery."
+      },
+      {
+        "doc_id": "doc_012_chevrolet_corvette_c7",
+        "title": "Chevrolet Corvette (C7)",
+        "text": "The Chevrolet Corvette (C7) is a sports car produced by Chevrolet.  The seventh generation Corvette was introduced for the 2014 model year as the first to bear the Corvette Stingray name since the 1968 third generation model.  The first C7 Corvette was delivered in the third quarter of 2013."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a70ff335542994082a3e49c",
+    "question": "Which Indian actress who earned filmfare award for Best female debut in \"Refugee\" acted in K3G movie?",
+    "gold_answer": "Kareena Kapoor Khan",
+    "supporting_doc_ids": [
+      "doc_013_kareena_kapoor_filmography",
+      "doc_014_kabhi_khushi_kabhie_gham"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Kareena Kapoor filmography",
+        "sent_id": 0
+      },
+      {
+        "title": "Kareena Kapoor filmography",
+        "sent_id": 1
+      },
+      {
+        "title": "Kabhi Khushi Kabhie Gham...",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_013_kareena_kapoor_filmography",
+        "title": "Kareena Kapoor filmography",
+        "text": "Kareena Kapoor, also credited by her married name Kareena Kapoor Khan, is an Indian actress who has appeared in over 50 Bollywood films.  Kapoor made her acting debut opposite Abhishek Bachchan in the 2000 drama \"Refugee\", for which she earned a Filmfare Award for Best Female Debut.  The following year, she appeared in five films, including the romance \"Mujhe Kucch Kehna Hai\", the thriller \"Ajnabee\", and the ensemble melodrama \"Kabhi Khushi Kabhie Gham...\".  The latter emerged as the highest-grossing Bollywood film in overseas market to that point, and the success of these films established her in Bollywood.  However, she followed this with roles in a series of commercial failures, including \"Mujhse Dosti Karoge! \" (2002) and \"Main Prem Ki Diwani Hoon\" (2003), in which she was perceived to play variations of her character in \"Kabhi Khushi Kabhie Gham...\"."
+      },
+      {
+        "doc_id": "doc_014_kabhi_khushi_kabhie_gham",
+        "title": "Kabhi Khushi Kabhie Gham...",
+        "text": "Kabhi Khushi Kabhie Gham... (English: \"Sometimes there's Happiness, Sometimes there's Sorrow\"), also known as K3G, is a 2001 Indian family drama film written and directed by Karan Johar and produced by Yash Johar.  The film stars Amitabh Bachchan, Jaya Bachchan, Shah Rukh Khan, Kajol, Hrithik Roshan and Kareena Kapoor in leading roles, with Rani Mukerji appearing in an extended cameo appearance.  The music was composed by Jatin Lalit, Sandesh Shandilya and Aadesh Shrivastava, with lyrics penned by Sameer and Anil Pandey.  The background score was composed by Babloo Chakravarty.  The film tells the story of an Indian family, which faces troubles and misunderstandings over their adopted son's marriage to a girl belonging to a lower socio-economic group than them."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a71095e5542994082a3e4f3",
+    "question": "What is the name of Bruce Willis's character in Unbreakable?",
+    "gold_answer": "David Dunn",
+    "supporting_doc_ids": [
+      "doc_015_unbreakable_film",
+      "doc_016_david_dunn_character"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Unbreakable (film)",
+        "sent_id": 2
+      },
+      {
+        "title": "David Dunn (character)",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_015_unbreakable_film",
+        "title": "Unbreakable (film)",
+        "text": "Unbreakable is a 2000 American superhero thriller film written, produced, and directed by M. Night Shyamalan, and starring Bruce Willis and Samuel L. Jackson, alongside Robin Wright and Spencer Treat Clark.  The movie is the first installment in a trilogy.  In \"Unbreakable\", a security guard named David Dunn survives a horrific train crash.  After the incident, with the help of a manipulative disabled comic book shop owner named Elijah Price, he learns that he possesses superhuman powers.  As Dunn explores and reluctantly confronts his powers while trying to navigate a difficult family life, he begins to fight crime and learns the true nature of Elijah Price."
+      },
+      {
+        "doc_id": "doc_016_david_dunn_character",
+        "title": "David Dunn (character)",
+        "text": "David Dunn is a fictional character and the main protagonist in the \"Unbreakable\" film series, portrayed by American actor Bruce Willis.  Dunn is a former college football prodigy and presently a security guard who discovers he has superhuman abilities."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a7109e95542994082a3e4fa",
+    "question": "What town did Sean Robert Francis play in as part of the most successful club in the Republic of Ireland?",
+    "gold_answer": "Tallaght, South Dublin",
+    "supporting_doc_ids": [
+      "doc_017_sean_francis_footballer",
+      "doc_018_shamrock_rovers_f_c"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Sean Francis (footballer)",
+        "sent_id": 0
+      },
+      {
+        "title": "Shamrock Rovers F.C.",
+        "sent_id": 0
+      },
+      {
+        "title": "Shamrock Rovers F.C.",
+        "sent_id": 1
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_017_sean_francis_footballer",
+        "title": "Sean Francis (footballer)",
+        "text": "Sean Robert Francis (born 1 August 1972) is a former footballer who played in the Football League for Birmingham City and Northampton Town, and in the League of Ireland for Cobh Ramblers, Shamrock Rovers and Longford Town.  He played as a forward."
+      },
+      {
+        "doc_id": "doc_018_shamrock_rovers_f_c",
+        "title": "Shamrock Rovers F.C.",
+        "text": "Shamrock Rovers Football Club (Irish: \"Cumann Peile Ruagairí na Seamróige\" ) is an Irish association football club based in Tallaght, South Dublin.  The club's senior team competes in the League of Ireland Premier Division and it is the most successful club in the Republic of Ireland.  The club has won the League of Ireland title a record 17 times and the FAI Cup a record 24 times.  Shamrock Rovers have supplied more players to the Republic of Ireland national football team (62) than any other club.  In All-Ireland competitions, such as the Intercity Cup, they hold the record for winning the most titles, having won seven cups overall."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a710a1e5542994082a3e4fd",
+    "question": "What is the genus of the viral disease that has symptoms such as fever, chills, loss of appetite, nausea, muscle pains, and headaches, and has a chance of causing liver damage?",
+    "gold_answer": "Flavivirus",
+    "supporting_doc_ids": [
+      "doc_019_flavivirus",
+      "doc_020_yellow_fever"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Flavivirus",
+        "sent_id": 0
+      },
+      {
+        "title": "Yellow fever",
+        "sent_id": 1
+      },
+      {
+        "title": "Yellow fever",
+        "sent_id": 3
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_019_flavivirus",
+        "title": "Flavivirus",
+        "text": "Flavivirus is a genus of viruses in the family \"Flaviviridae\".  This genus includes the West Nile virus, dengue virus, tick-borne encephalitis virus, yellow fever virus, Zika virus and several other viruses which may cause encephalitis, as well as insect-specific flaviviruses (ISFs) such as cell fusing agent virus (CFAV), Palm Creek virus (PCV), and Parramatta River virus (PaRV)."
+      },
+      {
+        "doc_id": "doc_020_yellow_fever",
+        "title": "Yellow fever",
+        "text": "Yellow fever is a viral disease of typically short duration.  In most cases, symptoms include fever, chills, loss of appetite, nausea, muscle pains particularly in the back, and headaches.  Symptoms typically improve within five days.  In about 15% of people within a day of improving, the fever comes back, abdominal pain occurs, and liver damage begins causing yellow skin.  If this occurs, the risk of bleeding and kidney problems is also increased."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a710bb15542994082a3e50d",
+    "question": "Which American professional poker player also starred in the 2015 movie \"Extraction\"?",
+    "gold_answer": "Dan Bilzerian",
+    "supporting_doc_ids": [
+      "doc_021_extraction_film",
+      "doc_022_dan_bilzerian"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Extraction (film)",
+        "sent_id": 0
+      },
+      {
+        "title": "Extraction (film)",
+        "sent_id": 1
+      },
+      {
+        "title": "Dan Bilzerian",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_021_extraction_film",
+        "title": "Extraction (film)",
+        "text": "Extraction is a 2015 American action-thriller film directed by Steven C. Miller and written by Umair Aleem.  The film stars Kellan Lutz, Bruce Willis, Gina Carano, D. B. Sweeney, Dan Bilzerian and Steve Coulter.  The film was released on December 18, 2015, in a limited release, and through video on demand by Lionsgate Premiere."
+      },
+      {
+        "doc_id": "doc_022_dan_bilzerian",
+        "title": "Dan Bilzerian",
+        "text": "Dan Brandon Bilzerian (born December 7, 1980) is an American professional poker player."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a710d155542994082a3e520",
+    "question": "Who was the defense counsel of a German woman who underwent Catholic exorcism rites during the year before her death?",
+    "gold_answer": "Erich Schmidt-Leichner",
+    "supporting_doc_ids": [
+      "doc_023_erich_schmidt_leichner",
+      "doc_024_anneliese_michel"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Erich Schmidt-Leichner",
+        "sent_id": 0
+      },
+      {
+        "title": "Erich Schmidt-Leichner",
+        "sent_id": 1
+      },
+      {
+        "title": "Anneliese Michel",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_023_erich_schmidt_leichner",
+        "title": "Erich Schmidt-Leichner",
+        "text": "Erich Schmidt-Leichner (14 October 1910 – 17 March 1983) was a German lawyer who made a name as a distinguished defense counsel at the Nuremberg Trials (1945 - 1946).  In 1978, he was a defense counsel in the \"Klingenberg Case\" (Anneliese Michel), where a married couple were accused of negligent homicide for failing to call a medical doctor during an exorcism of their daughter."
+      },
+      {
+        "doc_id": "doc_024_anneliese_michel",
+        "title": "Anneliese Michel",
+        "text": "Anneliese Michel ] (21 September 1952 – 1 July 1976) was a German woman who underwent Catholic exorcism rites during the year before her death.  Later investigation determined that she was malnourished and dehydrated; her parents and the priests responsible were charged with negligent homicide.  She was diagnosed with epileptic psychosis (temporal lobe epilepsy) and had a history of psychiatric treatment, which was overall not effective.  Her condition worsened with her displaying various other symptoms which she took medication for as well.  Michel and her family became convinced she was possessed by demons.  The case attracted media and public attention because of the priests' unusual decision to employ a 400-year-old ritual of exorcism.  The film \"The Exorcism of Emily Rose\" is loosely based on her story."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a71148b5542994082a3e567",
+    "question": "What was the population of the city where Penobscot Marine Museum is located?",
+    "gold_answer": "The population was 2,615",
+    "supporting_doc_ids": [
+      "doc_025_penobscot_marine_museum",
+      "doc_026_searsport_maine"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Penobscot Marine Museum",
+        "sent_id": 0
+      },
+      {
+        "title": "Searsport, Maine",
+        "sent_id": 1
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_025_penobscot_marine_museum",
+        "title": "Penobscot Marine Museum",
+        "text": "The Penobscot Marine Museum in Searsport, Maine, United States, is Maine's oldest maritime museum and is designed to preserve and educate people regarding Maine's and Searsport's rich and unique maritime and shipbuilding history.  It was founded in 1936, and is located at 5 Church Street in the center of Searsport."
+      },
+      {
+        "doc_id": "doc_026_searsport_maine",
+        "title": "Searsport, Maine",
+        "text": "Searsport is an incorporated town and deep water seaport located at the confluence of the Penobscot River estuary and the Penobscot Bay immediately SE of Sears Island and Cape Jellison in Waldo County, Maine, United States.  The population was 2,615 at the 2010 census.  Searsport includes the village of North Searsport.  The town is known as \"the home of the famous sea captains\" and the \"Antique Capital of Maine\"."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a7115475542994082a3e56d",
+    "question": "In what movie did a Kenyan-Mexican actress, who graduated from Hampshire College, star in in 2015?",
+    "gold_answer": "Star Wars: The Force Awakens",
+    "supporting_doc_ids": [
+      "doc_027_star_wars_the_force_awakens",
+      "doc_028_lupita_nyong_o"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Star Wars: The Force Awakens",
+        "sent_id": 0
+      },
+      {
+        "title": "Star Wars: The Force Awakens",
+        "sent_id": 2
+      },
+      {
+        "title": "Lupita Nyong'o",
+        "sent_id": 0
+      },
+      {
+        "title": "Lupita Nyong'o",
+        "sent_id": 2
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_027_star_wars_the_force_awakens",
+        "title": "Star Wars: The Force Awakens",
+        "text": "Star Wars: The Force Awakens (also known as Star Wars: Episode VII – The Force Awakens) is a 2015 American epic space opera film co-written, co-produced and directed by J. J. Abrams.  The sequel to 1983's \"Return of the Jedi\", \"The Force Awakens\" is the first installment of the \"Star Wars\" sequel trilogy.  It stars Harrison Ford, Mark Hamill, Carrie Fisher, Adam Driver, Daisy Ridley, John Boyega, Oscar Isaac, Lupita Nyong'o, Andy Serkis, Domhnall Gleeson, Anthony Daniels, Peter Mayhew, and Max von Sydow.  Produced by Lucasfilm Ltd. and Abrams' production company Bad Robot Productions and distributed worldwide by Walt Disney Studios Motion Pictures, \"The Force Awakens\" was the first \"Star Wars\" film not produced by franchise creator George Lucas.  Set 30 years after \"Return of the Jedi\", it follows Rey, Finn and Poe Dameron's search for Luke Skywalker and their fight alongside the Resistance, led by veterans of the Rebel Alliance, against Kylo Ren and the First Order, a successor to the Galactic Empire."
+      },
+      {
+        "doc_id": "doc_028_lupita_nyong_o",
+        "title": "Lupita Nyong'o",
+        "text": "Lupita Amondi Nyong'o (] , ] ; born March 1, 1983) is a Kenyan-Mexican actress.  She was born in Mexico to Kenyan parents and raised in Kenya.  She attended college in the United States, earning a bachelor's degree in film and theater studies from Hampshire College."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a7119095542994082a3e589",
+    "question": "Who is current vice captain of the English Test team, Jamie Atkinson or Ben Stokes?",
+    "gold_answer": "Ben Stokes",
+    "supporting_doc_ids": [
+      "doc_029_jamie_atkinson",
+      "doc_030_ben_stokes"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Jamie Atkinson",
+        "sent_id": 0
+      },
+      {
+        "title": "Jamie Atkinson",
+        "sent_id": 3
+      },
+      {
+        "title": "Ben Stokes",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_029_jamie_atkinson",
+        "title": "Jamie Atkinson",
+        "text": "James John Atkinson (born 24 August 1990 in Hong Kong) is an international cricketer who plays cricket for Hong Kong.  He also captained the Hong Kong cricket team before stepping down in May 2015.  A wicket-keeper, he has also represented Hong Kong at Under-19s level, and was selected as part of their squad for the 2010 U-19 Cricket World Cup.  where he became Facebook friends with Ben Stokes He was the first player born in the 1990s to play in a One Day International.  His father Steve played Minor Counties cricket."
+      },
+      {
+        "doc_id": "doc_030_ben_stokes",
+        "title": "Ben Stokes",
+        "text": "Benjamin Andrew \"Ben\" Stokes (born 4 June 1991) is an English international cricketer who is the current vice captain of the English Test team.  Born in Christchurch, New Zealand, Ben moved to northern England at the age of 12, where he learnt the game and began playing club cricket for local teams.  He is an all-rounder who bowls right-arm fast-medium pace and bats left-handed."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a7119f75542994082a3e58e",
+    "question": "When was the composer of \"Persian Surgery Dervishes\" born?",
+    "gold_answer": "June 24, 1935",
+    "supporting_doc_ids": [
+      "doc_031_persian_surgery_dervishes",
+      "doc_032_terry_riley"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Persian Surgery Dervishes",
+        "sent_id": 0
+      },
+      {
+        "title": "Terry Riley",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_031_persian_surgery_dervishes",
+        "title": "Persian Surgery Dervishes",
+        "text": "Persian Surgery Dervishes is a recording of two live solo electric organ concerts, the first held in Los Angeles on 18 April 1971 and the second in Paris on 24 May 1972, by avant-garde minimalist composer Terry Riley, following his \"A Rainbow in Curved Air\" and \"In C\".  The two very different performances of the same composition \"Persian Surgery Dervishes\" are meant to show the importance of improvisation in Riley's music.  Riley plays a modified Yamaha electric organ tuned in just intonation."
+      },
+      {
+        "doc_id": "doc_032_terry_riley",
+        "title": "Terry Riley",
+        "text": "Terrence Mitchell \"Terry\" Riley ( ; born June 24, 1935) is an American composer and performing musician associated with the minimalist school of Western classical music, of which he was a pioneer.  His work is deeply influenced by both jazz and Indian classical music."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a711c535542994082a3e59b",
+    "question": "Albanians in Montenegro which make up 4.91 of the county's total population could be members of the Albanian Coalation Perspect which is a what? ",
+    "gold_answer": "Albanian political party in Montenegro",
+    "supporting_doc_ids": [
+      "doc_033_albanian_coalition_quot_perspective_quot",
+      "doc_034_albanians_in_montenegro"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Albanian Coalition &quot;Perspective&quot;",
+        "sent_id": 0
+      },
+      {
+        "title": "Albanians in Montenegro",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_033_albanian_coalition_quot_perspective_quot",
+        "title": "Albanian Coalition &quot;Perspective&quot;",
+        "text": "The Albanian Coalition \"Perspective\" is an Albanian political party in Montenegro."
+      },
+      {
+        "doc_id": "doc_034_albanians_in_montenegro",
+        "title": "Albanians in Montenegro",
+        "text": "Albanians in Montenegro (, Albanian: \"Shqiptarët e Malit të Zi\" ) constitute 4.91% of the county's total population.  Albanians of Montenegro are Ghegs who mainly live in southeastern and eastern Montenegro, mainly in the following municipalities: Ulcinj (71% of population), Plav (19%), Bar (6%), Podgorica (5%) and Rožaje (5%)."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a71214d5542994082a3e5b9",
+    "question": "What production company was founded by George Balanchine to create a live stage version of the 1942 film Casablanca?",
+    "gold_answer": "The Los Angeles Dance Theater",
+    "supporting_doc_ids": [
+      "doc_035_los_angeles_dance_theater",
+      "doc_036_casablanca_film"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Los Angeles Dance Theater",
+        "sent_id": 0
+      },
+      {
+        "title": "Casablanca (film)",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_035_los_angeles_dance_theater",
+        "title": "Los Angeles Dance Theater",
+        "text": "The Los Angeles Dance Theater is a dance-oriented production company founded in 2003 by George Balanchine protege John Clifford.  The company was requested by Warner Bros.  Theatre Ventures, Inc., the live theatre division of Warner Bros.  Studios.  The company was founded for the purpose of creating a live-stage dance version of the film \"Casablanca\". \" \"Casablanca, The Dance\"\" premiered in Beijing, China on the 5th of April, 2005 at the 10,000 seat \"Great Hall of the People\" to sold-out audiences and standing ovations.  A projected world tour was cancelled when Warner Bros. ceased live theatre operations after the failure of their first Broadway musical, \"Lestat\".  Later, Warner Bros. restarted producing musicals, fueling rumors about the revival of the \"Casablanca, The Dance,\" world tour."
+      },
+      {
+        "doc_id": "doc_036_casablanca_film",
+        "title": "Casablanca (film)",
+        "text": "Casablanca is a 1942 American romantic drama film directed by Michael Curtiz and based on Murray Burnett and Joan Alison's unproduced stage play \"Everybody Comes to Rick's\".  The film stars Humphrey Bogart, Ingrid Bergman, and Paul Henreid; it also features Claude Rains, Conrad Veidt, Sydney Greenstreet, Peter Lorre, and Dooley Wilson.  Set during World War II, it focuses on an American expatriate who must choose between his love for a woman and helping her husband, a Czech Resistance leader, escape the Vichy-controlled city of Casablanca to continue his fight against the Nazis."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a71224f5542994082a3e5c1",
+    "question": "When was the actor born who starred in Nambia: The Struggle for Liberation and played Roger Murtaugh in the \"Lethal Weapon\" film series?",
+    "gold_answer": "July 22, 1946",
+    "supporting_doc_ids": [
+      "doc_037_namibia_the_struggle_for_liberation",
+      "doc_038_danny_glover"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Namibia: The Struggle for Liberation",
+        "sent_id": 0
+      },
+      {
+        "title": "Namibia: The Struggle for Liberation",
+        "sent_id": 1
+      },
+      {
+        "title": "Danny Glover",
+        "sent_id": 0
+      },
+      {
+        "title": "Danny Glover",
+        "sent_id": 1
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_037_namibia_the_struggle_for_liberation",
+        "title": "Namibia: The Struggle for Liberation",
+        "text": "Namibia: The Struggle for Liberation is a 2007 epic film on the Namibian independence struggle against South African occupation as seen through the life of Sam Nujoma, the leader of the South West Africa People's Organisation and the first president of the Republic of Namibia.  The film was written and directed by Charles Burnett, the African American filmmaker, and stars Carl Lumbly and Danny Glover.  The production was financed by the government of Namibia.  Music composed by Stephen James Taylor won the award for Best Music Score at the Kuala Lumpur International Film Festival where the film also won for Best African Film and for Best Director."
+      },
+      {
+        "doc_id": "doc_038_danny_glover",
+        "title": "Danny Glover",
+        "text": "Danny Lebern Glover (born July 22, 1946) is an American actor, film director, and political activist.  He is well known for his leading role as Roger Murtaugh in the \"Lethal Weapon\" film series, \"The Color Purple\" (1985), \"To Sleep with Anger\" (1990), \"Predator 2\" (1990), and \"Angels in the Outfield\" (1994).  He also has prominent supporting roles in \"Silverado\" (1985), \"Witness\" (1985), \"Saw\" (2004), \"Shooter\" (2007), \"2012\" (2009), \"Death at a Funeral\" (2010), \"Beyond the Lights\" (2014), and \"Dirty Grandpa\" (2016).  He has appeared in many other movies, television shows, and theatrical productions, and is an active supporter of various humanitarian and political causes."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a71231a5542994082a3e5c4",
+    "question": "What edible, juicy fruit is grown on a deciduous tree called 'pesco' in Italian?",
+    "gold_answer": "peach",
+    "supporting_doc_ids": [
+      "doc_039_pesco",
+      "doc_040_peach"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Pesco",
+        "sent_id": 0
+      },
+      {
+        "title": "Pesco",
+        "sent_id": 1
+      },
+      {
+        "title": "Peach",
+        "sent_id": 1
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_039_pesco",
+        "title": "Pesco",
+        "text": "Pesco is an Italian word meaning \"Peach tree\".  It may refer to:"
+      },
+      {
+        "doc_id": "doc_040_peach",
+        "title": "Peach",
+        "text": "The peach (\"Prunus persica\") is a deciduous tree native to the region of Northwest China between the Tarim Basin and the north slopes of the Kunlun Shan mountains, where it was first domesticated and cultivated.  It bears an edible juicy fruit called a peach or a nectarine."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a7125b95542994082a3e5d5",
+    "question": "Which town has a greater population as of the 2010 census, Minden, Nevada or Gardnerville, Nevada?",
+    "gold_answer": "Gardnerville",
+    "supporting_doc_ids": [
+      "doc_041_minden_nevada",
+      "doc_042_gardnerville_nevada"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Minden, Nevada",
+        "sent_id": 0
+      },
+      {
+        "title": "Minden, Nevada",
+        "sent_id": 1
+      },
+      {
+        "title": "Gardnerville, Nevada",
+        "sent_id": 0
+      },
+      {
+        "title": "Gardnerville, Nevada",
+        "sent_id": 1
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_041_minden_nevada",
+        "title": "Minden, Nevada",
+        "text": "Minden is an unincorporated town in Douglas County, Nevada, United States.  The population was 3,001 at the 2010 census.  It is the county seat of Douglas County and is adjacent to the town of Gardnerville.  It was founded in 1906 by Heinrich Friedrich Dangberg Jr., who named it after the town of Minden, in the German state of North Rhine-Westphalia, which was near his father's birthplace.  Minden was founded on company land of the Dangberg Home Ranch and Dangberg commissioned most of the town's early buildings.  Minden has had a post office since 1906."
+      },
+      {
+        "doc_id": "doc_042_gardnerville_nevada",
+        "title": "Gardnerville, Nevada",
+        "text": "Gardnerville is an unincorporated town in Douglas County, Nevada, United States, adjacent to the county seat of Minden.  The population was 5,656 at the 2010 census."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a71278c5542994082a3e5e2",
+    "question": "What North Carolina native did Danja produce songs for?",
+    "gold_answer": "J. Cole",
+    "supporting_doc_ids": [
+      "doc_043_danja_record_producer",
+      "doc_044_j_cole"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Danja (record producer)",
+        "sent_id": 1
+      },
+      {
+        "title": "J. Cole",
+        "sent_id": 1
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_043_danja_record_producer",
+        "title": "Danja (record producer)",
+        "text": "Floyd Nathaniel \"Nate\" Hills (born February 22, 1982), professionally known as Danja , is an American record producer and songwriter from Virginia Beach, Virginia.  He has produced songs for prominent artists such as Justin Bieber, Monica, Britney Spears, Usher, Keri Hilson, T.I., Nelly Furtado, Kevin Cossom, Ciara, Mariah Carey, Timbaland, Madonna, J. Cole, Kanye West, Whitney Houston, Missy Elliott, M.I.A., Justin Timberlake, JoJo, Joe Jonas, Simple Plan, The Clutch, Pink, T-Pain, Diddy, Meek Mill, Björk and Duran Duran."
+      },
+      {
+        "doc_id": "doc_044_j_cole",
+        "title": "J. Cole",
+        "text": "Jermaine Lamarr Cole (born January 28, 1985), better known by his stage name J. Cole, is an American hip hop recording artist and record producer.  Raised in Fayetteville, North Carolina, Cole initially gained recognition as a rapper following the release of his debut mixtape, \"The Come Up\", in early 2007.  Intent on further pursuing a solo career as a rapper, he went on to release two additional mixtapes after signing to Jay Z's Roc Nation imprint in 2009."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a7129685542994082a3e5fa",
+    "question": "Which \"Blackzilians\" fighter is currently competing in the Middleweight division of Ultimate Fighting Championship?",
+    "gold_answer": "Vitor Belfort",
+    "supporting_doc_ids": [
+      "doc_045_blackzilians",
+      "doc_046_vitor_belfort"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Blackzilians",
+        "sent_id": 1
+      },
+      {
+        "title": "Vitor Belfort",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_045_blackzilians",
+        "title": "Blackzilians",
+        "text": "The Blackzilians is a defunct professional team of fighters in mixed martial arts, boxing, kickboxing, amateur wrestling and catch wrestling located in South Florida.  They are most well known for being the team that includes former UFC light heavyweight champions 'Sugar' Rashad Evans and Vitor Belfort and former UFC lightweight champion Eddie Alvarez."
+      },
+      {
+        "doc_id": "doc_046_vitor_belfort",
+        "title": "Vitor Belfort",
+        "text": "Vitor Vieira Belfort (] ; born April 1, 1977) is a Brazilian mixed martial artist currently competing in the Middleweight division of the Ultimate Fighting Championship.  He is the former UFC Light Heavyweight Champion, UFC 12 Heavyweight Tournament Champion, and the Cage Rage World Light Heavyweight Champion.  As of June 16, 2017, he is the #11 contender in official UFC Middleweight rankings."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a71299e5542994082a3e5fe",
+    "question": "Drisheen is what type of product made in Ireland and other parts of Europe?",
+    "gold_answer": "Black pudding",
+    "supporting_doc_ids": [
+      "doc_047_drisheen",
+      "doc_048_black_pudding"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Drisheen",
+        "sent_id": 0
+      },
+      {
+        "title": "Black pudding",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_047_drisheen",
+        "title": "Drisheen",
+        "text": "Drisheen (Irish: \"drisín\" ) is a type of blood pudding made in Ireland.  It is distinguished from other forms of Irish black pudding by having a gelatinous consistency.  It is made from a mixture of cow's, pig's and/or sheep's blood, milk, salt and fat which is boiled and sieved and finally cooked using the main intestine of an animal (typically a pig or sheep) as the sausage skin.  The sausage may be flavoured with herbs, such as tansy.  The recipe for drisheen varies widely from place to place and it also differs depending on the time of year.  Drisheen is a cooked product but it usually requires further preparation before eating.  How this is done varies widely from place to place."
+      },
+      {
+        "doc_id": "doc_048_black_pudding",
+        "title": "Black pudding",
+        "text": "Black pudding is a type of blood sausage commonly eaten in Great Britain, Ireland and in other parts of Europe.  It is generally made from pork fat or beef suet, pork blood and a relatively high proportion of oatmeal, in some recipes mixed with oat groats and sometimes even barley groats."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a712af15542994082a3e614",
+    "question": "Which show that premiered in May 2011 is hosted by someone with the birth name Richard Kirschner?",
+    "gold_answer": "My Cat from Hell",
+    "supporting_doc_ids": [
+      "doc_049_my_cat_from_hell",
+      "doc_050_jackson_galaxy"
+    ],
+    "supporting_facts": [
+      {
+        "title": "My Cat from Hell",
+        "sent_id": 0
+      },
+      {
+        "title": "Jackson Galaxy",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_049_my_cat_from_hell",
+        "title": "My Cat from Hell",
+        "text": "My Cat from Hell is an American reality television series that airs on Animal Planet and premiered in May 2011.  It stars Jackson Galaxy, a cat behaviorist by day and a musician by night, who visits the homes of cat owners in order to resolve conflicts or behavior issues between the owners and their cats or between the cats and other pets.  Behavioral issues can include attacks by the cats on their owners."
+      },
+      {
+        "doc_id": "doc_050_jackson_galaxy",
+        "title": "Jackson Galaxy",
+        "text": "Jackson Galaxy (born April 28, 1966, as Richard Kirschner) is a cat behaviorist and the host of the television show \"My Cat from Hell\"."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a712beb5542994082a3e61c",
+    "question": "What Golden Globe Award actor starred in the film Little Fugitive? ",
+    "gold_answer": "Peter Dinklage",
+    "supporting_doc_ids": [
+      "doc_051_little_fugitive_2006_film",
+      "doc_052_peter_dinklage"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Little Fugitive (2006 film)",
+        "sent_id": 0
+      },
+      {
+        "title": "Little Fugitive (2006 film)",
+        "sent_id": 2
+      },
+      {
+        "title": "Peter Dinklage",
+        "sent_id": 1
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_051_little_fugitive_2006_film",
+        "title": "Little Fugitive (2006 film)",
+        "text": "Little Fugitive is a 2006 remake of the film of the same name.  It was directed by Joanna Lipper and produced by Nicholas Paleologos.  The film is set in present day Brooklyn and tells the story of 11-year-old Lenny (Nicolas Martí Salgado) who must take care of his 7-year-old brother, Joey (David Castro), while their father (Peter Dinklage) is in jail and their mother work long hours a nursing home.  When Lenny plays a practical joke on Joey that goes too far, Joey soon runs away to Coney Island."
+      },
+      {
+        "doc_id": "doc_052_peter_dinklage",
+        "title": "Peter Dinklage",
+        "text": "Peter Hayden Dinklage ( , born June 11, 1969) is an American actor and film producer.  He has received numerous accolades, including a Golden Globe Award and two Primetime Emmy Awards."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a712c4b5542994082a3e622",
+    "question": "What heritage site, known for a British explorer, is listed Seventeen Seventy Australia?",
+    "gold_answer": "Captain Cook's Landing Place",
+    "supporting_doc_ids": [
+      "doc_053_cook_s_landing_place_town_of_seventeen_seventy",
+      "doc_054_james_cook"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Cook's Landing Place, Town of Seventeen Seventy",
+        "sent_id": 0
+      },
+      {
+        "title": "James Cook",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_053_cook_s_landing_place_town_of_seventeen_seventy",
+        "title": "Cook's Landing Place, Town of Seventeen Seventy",
+        "text": "Captain Cook's Landing Place is a heritage-listed site at Seventeen Seventy, Gladstone Region, Queensland, Australia.  It is so named because Captain Cook landed there on 24 May 1770.  It was added to the Queensland Heritage Register on 27 March 1996."
+      },
+      {
+        "doc_id": "doc_054_james_cook",
+        "title": "James Cook",
+        "text": "Captain James Cook (7 November 172814 February 1779) was a British explorer, navigator, cartographer, and captain in the Royal Navy.  Cook made detailed maps of Newfoundland prior to making three voyages to the Pacific Ocean, during which he achieved the first recorded European contact with the eastern coastline of Australia and the Hawaiian Islands, and the first recorded circumnavigation of New Zealand."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a712e895542994082a3e636",
+    "question": "C.J. Hunter was tested positive for which type of injected steroid before he competed in the 2000 Summer Olympic Games?",
+    "gold_answer": "anabolic–androgenic steroid (AAS)",
+    "supporting_doc_ids": [
+      "doc_055_c_j_hunter",
+      "doc_056_nandrolone"
+    ],
+    "supporting_facts": [
+      {
+        "title": "C. J. Hunter",
+        "sent_id": 2
+      },
+      {
+        "title": "Nandrolone",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_055_c_j_hunter",
+        "title": "C. J. Hunter",
+        "text": "Cottrell James \"C. J.\" Hunter III (born December 14, 1968) is an American former shot putter and coach.  He was the 1999 World Champion, but is perhaps best known for his involvement in the BALCO scandal and as the onetime spouse of sprinter Marion Jones.  His personal best was 71' 9\", (21,87 m) thrown during a 2nd-place finish in the 2000 US Olympic Trials.  A month later he was tested positive for the performance-enhancing steroid Nandrolone at the Bislett Games, which was revealed before he had been scheduled to compete in the 2000 Summer Olympic Games.  He had previously competed at the 1996 Summer Olympic Games, finishing seventh."
+      },
+      {
+        "doc_id": "doc_056_nandrolone",
+        "title": "Nandrolone",
+        "text": "Nandrolone is an injected anabolic–androgenic steroid (AAS) which is used medically in the form of esters such as nandrolone decanoate (brand name Deca-Durabolin) and nandrolone phenylpropionate (brand name Durabolin).  They are not active by mouth, and must be administered via intramuscular injection.  When administered in this way, they form a depot from which they are slowly released, and hence have a long duration of action.  Nandrolone esters are prodrugs, and are rapidly hydrolyzed into nandrolone once in the circulation."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a7130365542994082a3e645",
+    "question": "What town did Moe Sedway have success in after Benjamin \"Bugsy\" Siegel's murder?",
+    "gold_answer": "Las Vegas",
+    "supporting_doc_ids": [
+      "doc_057_cohen_crime_family",
+      "doc_058_moe_sedway"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Cohen crime family",
+        "sent_id": 1
+      },
+      {
+        "title": "Moe Sedway",
+        "sent_id": 2
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_057_cohen_crime_family",
+        "title": "Cohen crime family",
+        "text": "The Cohen crime family, or the Siegel crime syndicate, was an Italian-American Mafia / Jewish Mafia crime family created by New York Jewish American mobster Benjamin \"Bugsy\" Siegel in the early 1930s.  Siegel ran Los Angeles and later Las Vegas' illegal gambling and prostitution rings with his lieutenants Mickey Cohen, David Berman, Harold \"Hooky\" Rothman, Moe Sedway and boss of the L.A. family Jack Dragna."
+      },
+      {
+        "doc_id": "doc_058_moe_sedway",
+        "title": "Moe Sedway",
+        "text": "Moe Sedway (1894–1952) was a Jewish-American businessman and mobster.  He was an associate of Bugsy Siegel and a faithful lieutenant of organized crime czar Meyer Lansky.  He and Gus Greenbaum made the Flamingo Hotel & Casino in Las Vegas very successful after Siegal's murder."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a7131565542994082a3e64f",
+    "question": "Q: Which actor played a role in the comedy series \"30 Rock\" as well as the drama series \"Mad Men\"? A: Jon Hamm",
+    "gold_answer": "Jon Hamm",
+    "supporting_doc_ids": [
+      "doc_059_live_show",
+      "doc_060_jon_hamm"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Live Show",
+        "sent_id": 3
+      },
+      {
+        "title": "Jon Hamm",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_059_live_show",
+        "title": "Live Show",
+        "text": "\"Live Show\" is the of the fifth season of the American television comedy series \"30 Rock\", and the 84th episode overall.  It was directed by Beth McCarthy-Miller, and co-written by series creator Tina Fey and co-showrunner and executive producer Robert Carlock.  The episode originally aired live on the NBC television network in the United States on October 14, 2010, with separate tapings for the East Coast television audience as well as the West Coast.  \"Live Show\" featured appearances by Rachel Dratch, Bill Hader, Matt Damon, Jon Hamm, and Julia Louis-Dreyfus."
+      },
+      {
+        "doc_id": "doc_060_jon_hamm",
+        "title": "Jon Hamm",
+        "text": "Jonathan Daniel Hamm (born March 10, 1971) is an American actor, director, and television producer best known for playing advertising executive Don Draper for the AMC television drama series, \"Mad Men\" (2007–2015)."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a7133565542994082a3e65c",
+    "question": "What Kentucky county has a population of 60,316 and features the Lake Louisvilla neighborhood?",
+    "gold_answer": "Oldham County",
+    "supporting_doc_ids": [
+      "doc_061_lake_louisvilla_louisville",
+      "doc_062_oldham_county_kentucky"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Lake Louisvilla, Louisville",
+        "sent_id": 0
+      },
+      {
+        "title": "Lake Louisvilla, Louisville",
+        "sent_id": 1
+      },
+      {
+        "title": "Oldham County, Kentucky",
+        "sent_id": 0
+      },
+      {
+        "title": "Oldham County, Kentucky",
+        "sent_id": 1
+      },
+      {
+        "title": "Oldham County, Kentucky",
+        "sent_id": 4
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_061_lake_louisvilla_louisville",
+        "title": "Lake Louisvilla, Louisville",
+        "text": "Lake Louisvilla is a neighborhood partially located in Louisville, Kentucky.  It is located between Westport Road in Louisville and KY 22 in Oldham County.  Lake Louisvilla was developed in the 1920s as a summer resort for people living in the city of Louisville.  The state of Kentucky drained the lake in the late 1980s due to safety concerns regarding the stability of a dam."
+      },
+      {
+        "doc_id": "doc_062_oldham_county_kentucky",
+        "title": "Oldham County, Kentucky",
+        "text": "Oldham County is a county located in the commonwealth of Kentucky.  As of the 2010 census, the population was 60,316.  Its county seat is La Grange.  The county is named for Colonel William Oldham.  Oldham County was a prohibition or completely dry county until January 2005 as the result of a 2004 'moist' vote, permitting sales of alcohol in restaurants that seat at least 100 patrons in which 70%+ of total revenue is derived from sales of food.  After a vote in late 2015; Oldham county has become a completely wet county."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a7133fa5542994082a3e660",
+    "question": "What is the relation between current manager of Chinese club Tianjin Quanjian and Paolo Cannavaro?",
+    "gold_answer": "brother",
+    "supporting_doc_ids": [
+      "doc_063_paolo_cannavaro",
+      "doc_064_fabio_cannavaro"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Paolo Cannavaro",
+        "sent_id": 0
+      },
+      {
+        "title": "Paolo Cannavaro",
+        "sent_id": 1
+      },
+      {
+        "title": "Fabio Cannavaro",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_063_paolo_cannavaro",
+        "title": "Paolo Cannavaro",
+        "text": "Paolo Cannavaro (born 26 June 1981) is an Italian footballer who plays for Sassuolo as a defender.  After beginning his career with Napoli, he moved to Parma in 1999, where he played alongside his older brother, 2006 FIFA World Cup and Ballon d'Or winner Fabio Cannavaro, who was also a defender, and who currently coaches Chinese club Tianjin Quanjian.  Paolo remained with the club for seven seasons, aside from a loan spell with Verona during the 2001–02 season.  In 2006, he returned to Napoli, where he was eventually named the club's captain, and helped the team win the Coppa Italia in 2012, the club's first title in over 20 years.  After eight seasons with Napoli, he moved to Sassuolo in 2014."
+      },
+      {
+        "doc_id": "doc_064_fabio_cannavaro",
+        "title": "Fabio Cannavaro",
+        "text": "Fabio Cannavaro, (] ; born 13 September 1973) is an Italian former professional footballer and current manager of Chinese club Tianjin Quanjian."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a7136e25542994082a3e67e",
+    "question": "What Hong Kong actor born in 1980 will star in \"Heart and Greed\"?",
+    "gold_answer": "Bosco Wong Chung-chak",
+    "supporting_doc_ids": [
+      "doc_065_heart_and_greed",
+      "doc_066_bosco_wong"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Heart and Greed",
+        "sent_id": 0
+      },
+      {
+        "title": "Heart and Greed",
+        "sent_id": 2
+      },
+      {
+        "title": "Bosco Wong",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_065_heart_and_greed",
+        "title": "Heart and Greed",
+        "text": "Heart and Greed () is an upcoming 2017 drama produced by TVB and Tencent Penguin Pictures.  It is the third installment of the Heart of Greed series following Moonlight Resonance.  It stars Louise Lee, Ha Yu, Michelle Yim, Susanna Kwan, Bosco Wong, Vincent Wong, Sharon Chan, Eliza Sam, Louis Yuen, Priscilla Wong, Michael Tong, Nora Miao and Joseph Lee."
+      },
+      {
+        "doc_id": "doc_066_bosco_wong",
+        "title": "Bosco Wong",
+        "text": "Bosco Wong Chung-chak (, born 13 December 1980) is a Hong Kong actor under TVB management and singer under East Asia Music."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a71380c5542994082a3e68b",
+    "question": "What iron-hulled steamship designed by Theodore Timby was The Orleans County Monitor Newspaper named after? ",
+    "gold_answer": "USS \"Monitor\"",
+    "supporting_doc_ids": [
+      "doc_067_orleans_county_monitor",
+      "doc_068_uss_monitor"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Orleans County Monitor",
+        "sent_id": 2
+      },
+      {
+        "title": "USS Monitor",
+        "sent_id": 0
+      },
+      {
+        "title": "USS Monitor",
+        "sent_id": 3
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_067_orleans_county_monitor",
+        "title": "Orleans County Monitor",
+        "text": "The Orleans County Monitor was a weekly newspaper published in Barton, Vermont from January 8, 1872 to 1953.  It was published by Ellery H. Webster in 1872.  An American Civil War veteran, he named it after the USS \"Monitor\".  George H. Blake published the paper in 1877.  The circulation was 1,400.  Wallace Harry Gilpin owned the paper from 1904 to 1953."
+      },
+      {
+        "doc_id": "doc_068_uss_monitor",
+        "title": "USS Monitor",
+        "text": "USS \"Monitor\" was an iron-hulled steamship.  Built during the American Civil War, she was the first ironclad warship commissioned by the Union Navy.  \"Monitor\" is most famous for her central role in the Battle of Hampton Roads on 9 March 1862, where, under the command of Lieutenant John Worden, she fought the casemate ironclad  (built on the hull of the former steam frigate USS \"Merrimack\" ) to a standstill.  The unique design of the ship, distinguished by its revolving turret which was designed by American inventor Theodore Timby, was quickly duplicated and established the monitor type of warship."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a713a5a5542994082a3e6a9",
+    "question": "What football club plays in the area between the old tool gates: Brook Bar and Trafford bar?",
+    "gold_answer": "Manchester United",
+    "supporting_doc_ids": [
+      "doc_069_manchester_united_f_c_in_european_football",
+      "doc_070_old_trafford_greater_manchester"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Manchester United F.C. in European football",
+        "sent_id": 0
+      },
+      {
+        "title": "Old Trafford, Greater Manchester",
+        "sent_id": 0
+      },
+      {
+        "title": "Old Trafford, Greater Manchester",
+        "sent_id": 1
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_069_manchester_united_f_c_in_european_football",
+        "title": "Manchester United F.C. in European football",
+        "text": "Manchester United Football Club is an English football club based in Old Trafford, Greater Manchester.  They were the first English club to enter European competition, entering the European Cup in 1956.  Since then, the club has competed in every UEFA-organised competition, with the exception of the now-defunct Intertoto Cup."
+      },
+      {
+        "doc_id": "doc_070_old_trafford_greater_manchester",
+        "title": "Old Trafford, Greater Manchester",
+        "text": "Old Trafford is an area of Stretford, in the Metropolitan Borough of Trafford, Greater Manchester, England, 2 mi southwest of Manchester city centre.  The crossroads sites of two old toll gates roughly delineate the borders of the area: Brooks's Bar to the east and Trafford Bar to the west."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a713b325542994082a3e6b5",
+    "question": "What was the capital of India when the Taj Mahal was commissioned?",
+    "gold_answer": "Agra",
+    "supporting_doc_ids": [
+      "doc_071_agra_fort",
+      "doc_072_taj_mahal"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Agra Fort",
+        "sent_id": 1
+      },
+      {
+        "title": "Taj Mahal",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_071_agra_fort",
+        "title": "Agra Fort",
+        "text": "Agra Fort is a historical fort in the city of Agra in India.  It was the main residence of the emperors of the Mughal Dynasty till 1638, when the capital was shifted from Agra to Delhi.  The Agra fort is a UNESCO World Heritage site.  It is about 2.5 km northwest of its more famous sister monument, the Taj Mahal.  The fort can be more accurately described as a walled city."
+      },
+      {
+        "doc_id": "doc_072_taj_mahal",
+        "title": "Taj Mahal",
+        "text": "The Taj Mahal ( , more often ; meaning Crown of the Palace) is an ivory-white marble mausoleum on the south bank of the Yamuna river in the Indian city of Agra.  It was commissioned in 1632 by the Mughal emperor, Shah Jahan (reigned 1628–1658), to house the tomb of his favourite wife, Mumtaz Mahal.  The tomb is the centrepiece of a 42 acre complex, which includes a mosque and a guest house, and is set in formal gardens bounded on three sides by a crenellated wall."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a713ea95542994082a3e6e4",
+    "question": "Alvaro Mexia had a diplomatic mission with which tribe of indigenous people?",
+    "gold_answer": "Apalachees",
+    "supporting_doc_ids": [
+      "doc_073_alvaro_mexia",
+      "doc_074_indigenous_peoples_of_florida"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Alvaro Mexia",
+        "sent_id": 0
+      },
+      {
+        "title": "Alvaro Mexia",
+        "sent_id": 1
+      },
+      {
+        "title": "Indigenous peoples of Florida",
+        "sent_id": 2
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_073_alvaro_mexia",
+        "title": "Alvaro Mexia",
+        "text": "Alvaro Mexia was a 17th-century Spanish explorer and cartographer of the east coast of Florida.  Mexia was stationed in St Augustine and was given a diplomatic mission to the native populations living south of St. Augustine and in the Cape Canaveral area.  This mission resulted in a \"Period of Friendship\" between the Spanish and the Ais native population."
+      },
+      {
+        "doc_id": "doc_074_indigenous_peoples_of_florida",
+        "title": "Indigenous peoples of Florida",
+        "text": "The Indigenous peoples of Florida lived in what is now known as Florida for more than 12,000 years before the time of first contact with Europeans.  However, the indigenous Floridians had largely died out by the early 18th century.  Some Apalachees migrated to Louisiana, where their descendants now live, some were taken to Cuba and Mexico by the Spanish in the 18th century, and a few may have been absorbed into the Seminole and Miccosukee tribes."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a713f395542994082a3e6ea",
+    "question": "Where does the state legislature in which John Coffin Talbot served convene?",
+    "gold_answer": "the State House in Augusta",
+    "supporting_doc_ids": [
+      "doc_075_john_c_talbot",
+      "doc_076_maine_legislature"
+    ],
+    "supporting_facts": [
+      {
+        "title": "John C. Talbot",
+        "sent_id": 1
+      },
+      {
+        "title": "Maine Legislature",
+        "sent_id": 2
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_075_john_c_talbot",
+        "title": "John C. Talbot",
+        "text": "John Coffin Talbot (1784–1860) was an American businessperson and politician from Maine.  Talbot, a Democrat, served 6 one-year terms in the Maine Legislature, including two in the Maine House of Representatives (1825; 1831) and four in the Maine Senate (1832-1833; 1836-1837).  In his 4th and final Senate term, Talbot was elected Senate President."
+      },
+      {
+        "doc_id": "doc_076_maine_legislature",
+        "title": "Maine Legislature",
+        "text": "The Maine Legislature is the state legislature of the U.S. state of Maine.  It is a bicameral body composed of the lower house Maine House of Representatives and the upper house Maine Senate.  The Legislature convenes at the State House in Augusta, where it has met since 1832."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a713f3c5542994082a3e6eb",
+    "question": "Where does the train that runs from NYC and Miami station at in Florida?",
+    "gold_answer": "Jacksonville station",
+    "supporting_doc_ids": [
+      "doc_077_jacksonville_station",
+      "doc_078_silver_meteor"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Jacksonville station",
+        "sent_id": 0
+      },
+      {
+        "title": "Jacksonville station",
+        "sent_id": 1
+      },
+      {
+        "title": "Silver Meteor",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_077_jacksonville_station",
+        "title": "Jacksonville station",
+        "text": "Jacksonville station is an Amtrak train station in Jacksonville, Florida, United States.  It serves the \"Silver Meteor\" and \"Silver Star\" trains as well as the Thruway Motorcoach to Lakeland.  The station lies next door to a freight facility with its own platform and is also just east of Norfolk Southern's Simpson Yard."
+      },
+      {
+        "doc_id": "doc_078_silver_meteor",
+        "title": "Silver Meteor",
+        "text": "The Silver Meteor is a passenger train operated by Amtrak between New York City and Miami, Florida.  The first diesel-powered streamliner between New York and Florida, since being introduced by the Seaboard Air Line Railroad (SAL) in 1939, it remains in operation now.  The train is part of Amtrak's \"Silver Service\" along with the \"Silver Star\", another former SAL streamliner."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  },
+  {
+    "id": "5a7140585542994082a3e6fa",
+    "question": "Seal Harris was born in what county?",
+    "gold_answer": "Polk County",
+    "supporting_doc_ids": [
+      "doc_079_seale_harris",
+      "doc_080_cedartown_georgia"
+    ],
+    "supporting_facts": [
+      {
+        "title": "Seale Harris",
+        "sent_id": 0
+      },
+      {
+        "title": "Cedartown, Georgia",
+        "sent_id": 0
+      }
+    ],
+    "supporting_docs": [
+      {
+        "doc_id": "doc_079_seale_harris",
+        "title": "Seale Harris",
+        "text": "Seale Harris (March 13, 1870 – March 17, 1957) was an American physician and researcher born in Cedartown, Georgia.  He was nicknamed \"the Benjamin Franklin of Medicine\" by contemporaries for his leadership and writing on a wide range of medical and political topics.  Dr. Harris' most celebrated accomplishments were his 1924 hypothesis of hyperinsulinism as a cause of spontaneous hypoglycemia."
+      },
+      {
+        "doc_id": "doc_080_cedartown_georgia",
+        "title": "Cedartown, Georgia",
+        "text": "Cedartown is a city in Polk County, Georgia, United States.  As of the 2010 census, the city had a population of 9,750.  The city is the county seat of Polk County.  Cedartown is the principal city of and is included in the Cedartown, Georgia Micropolitan Statistical Area, which is included in the Atlanta-Sandy Springs-Gainesville, Georgia-Alabama (part) Combined Statistical Area."
+      }
+    ],
+    "hotpot_type": "bridge",
+    "hotpot_level": "hard"
+  }
+]

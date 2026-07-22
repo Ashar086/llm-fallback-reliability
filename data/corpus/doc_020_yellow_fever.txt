@@ -1,0 +1,3 @@
+# id: doc_020_yellow_fever
+# title: Yellow fever
+Yellow fever is a viral disease of typically short duration.  In most cases, symptoms include fever, chills, loss of appetite, nausea, muscle pains particularly in the back, and headaches.  Symptoms typically improve within five days.  In about 15% of people within a day of improving, the fever comes back, abdominal pain occurs, and liver damage begins causing yellow skin.  If this occurs, the risk of bleeding and kidney problems is also increased.

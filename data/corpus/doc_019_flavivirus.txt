@@ -1,0 +1,3 @@
+# id: doc_019_flavivirus
+# title: Flavivirus
+Flavivirus is a genus of viruses in the family "Flaviviridae".  This genus includes the West Nile virus, dengue virus, tick-borne encephalitis virus, yellow fever virus, Zika virus and several other viruses which may cause encephalitis, as well as insect-specific flaviviruses (ISFs) such as cell fusing agent virus (CFAV), Palm Creek virus (PCV), and Parramatta River virus (PaRV).

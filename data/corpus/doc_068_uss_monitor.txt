@@ -1,0 +1,3 @@
+# id: doc_068_uss_monitor
+# title: USS Monitor
+USS "Monitor" was an iron-hulled steamship.  Built during the American Civil War, she was the first ironclad warship commissioned by the Union Navy.  "Monitor" is most famous for her central role in the Battle of Hampton Roads on 9 March 1862, where, under the command of Lieutenant John Worden, she fought the casemate ironclad  (built on the hull of the former steam frigate USS "Merrimack" ) to a standstill.  The unique design of the ship, distinguished by its revolving turret which was designed by American inventor Theodore Timby, was quickly duplicated and established the monitor type of warship.

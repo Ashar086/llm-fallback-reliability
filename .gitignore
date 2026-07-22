@@ -1,0 +1,30 @@
+# Secrets / local env
+.env
+.env.*
+!.env.example
+
+# Run outputs (regenerate with run_pipeline.py)
+logs/
+logs_run_*.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Local scratch (keep out of public clones)
+*.xlsx
+*_raw.json
