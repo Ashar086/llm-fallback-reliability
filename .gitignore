@@ -28,3 +28,21 @@ Thumbs.db
 # Local scratch (keep out of public clones)
 *.xlsx
 *_raw.json
+
+# PDF / LaTeX build leftovers
+_pdf_build/
+figures/_pdf_preview/
+figures/_qa*.png
+overleaf_neurips_upload.zip
+paper_submission_named_latest.pdf
+paper_submission_*_FIXED.pdf
+paper_submission_new.pdf
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
