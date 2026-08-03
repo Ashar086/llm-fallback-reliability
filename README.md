@@ -11,8 +11,13 @@ on pass rate at modest extra cost. Blind retry (B1) and a cross-agent
 verification gate (P4) did not, even though they cost more and stretch p95
 latency. Full write-up: [`full_draft.md`](full_draft.md).
 
-This repo is for open reproduction and community feedback. Workshop submission
-is pending.
+This repository contains the code, data, and experimental framework accompanying the paper:
+
+> **Reliability & Fallback Design Patterns for Multi-Agent LLM Systems**
+
+**Status:** Submitted to the **NeurIPS 2026 Workshop "Who Verifies the Agents?"** (under review).
+
+The repository is provided for transparency, reproducibility, and community feedback.
 
 ---
 
@@ -125,12 +130,11 @@ logs/                    # local run outputs (gitignored)
 
 ---
 
-## How to cite
+## Citation
 
-Placeholder until a DOI or venue is fixed:
+If you use this repository, please cite:
 
-> Muhammad Ashar. (2026). *Reliability & Fallback Design Patterns for Multi-Agent
-> LLM Systems*. Preprint; workshop submission pending.
+> Muhammad Ashar. (2026). *Reliability & Fallback Design Patterns for Multi-Agent LLM Systems*. Submitted to the **NeurIPS 2026 Workshop "Who Verifies the Agents?"** (under review).
 
 See also [`CITATION.cff`](CITATION.cff).
 
