@@ -2,29 +2,33 @@ cff-version: 1.2.0
 message: "If you use this software or draft, please cite it as below."
 title: "Reliability & Fallback Design Patterns for Multi-Agent LLM Systems"
 type: software
+
 authors:
-  - family-names: Ashar
-    given-names: Muhammad
+  - family-names: Ishfaq
+    given-names: Muhammad Ashar
+
 abstract: >-
   Controlled comparison of fallback strategies (no fallback, blind retry,
   tool-grounded retry, deterministic checkpointing, graceful degradation,
   cross-agent verification) in a multi-agent multi-hop QA pipeline, measured
   on pass rate, latency, and cost.
+
 keywords:
   - multi-agent systems
   - large language models
   - reliability
   - fallback
   - LangGraph
+
 license: MIT
 version: "0.1.0"
 date-released: "2026-07-22"
-# Prefer preferred-citation once a DOI/venue exists.
+
 preferred-citation:
   type: article
   title: "Reliability & Fallback Design Patterns for Multi-Agent LLM Systems"
   authors:
-    - family-names: Ashar
-      given-names: Muhammad
+    - family-names: Ishfaq
+      given-names: Muhammad Ashar
   year: 2026
-  notes: "Preprint; workshop submission pending"
+  notes: 'Submitted to NeurIPS 2026 Workshop "Who Verifies the Agents?" (under review)'
