@@ -21,6 +21,16 @@ The repository is provided for transparency, reproducibility, and community feed
 
 ---
 
+## System Architecture
+
+<p align="center">
+  <img src="figures/Agent%20Orchestrator%20Fallback-2026-09-03-160610.png" alt="Reliability & Fallback Design Patterns Architecture" width="100%">
+</p>
+
+*Figure 1: Controlled comparison between standard blind retry cascading (Panel A) and the state-isolated deterministic fallback architecture (Panel B). Panel A illustrates the blind retry trap where failed turns and error tracebacks pollute the context window, driving compounding downstream failures. Panel B enforces deterministic schema checks via pre-commit gatekeepers, combined with atomic state rollbacks to isolate and purge contaminated execution turns.*
+
+---
+
 ## Six conditions
 
 | ID | Name | What it does |
