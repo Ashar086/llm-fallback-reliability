@@ -1,17 +1,8 @@
 \documentclass{article}
 
-% =============================================================================
-% NeurIPS 2026 official style — workshop double-blind submission (default)
-% =============================================================================
-% For camera-ready (named authors visible), switch to:
-%   \usepackage[dblblindworkshop, final]{neurips_2026}
-% For a non-workshop preprint:
-%   \usepackage[preprint]{neurips_2026}
-% =============================================================================
-\usepackage[dblblindworkshop]{neurips_2026}
-
-% Set your workshop name (required for workshop tracks; shown in the footnote).
-\workshoptitle{NeurIPS 2026 Workshop}
+% Camera-ready: named authors visible
+\usepackage[dblblindworkshop, final]{neurips_2026}
+\workshoptitle{NeurIPS 2026 Workshop VerifyAgents}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -32,7 +23,7 @@
   The Islamia University of Bahawalpur
   \And
   Muhammad Asad Ishfaq \\
-  The Islamia University of Bahawalpur
+  Indiana University Bloomington
 }
 
 \begin{document}
@@ -40,298 +31,248 @@
 \maketitle
 
 \begin{abstract}
-When a multi-agent LLM pipeline fails partway through a run, most systems either stop or blindly retry the same stage. Neither is a real reliability strategy. We compare six conditions on a fixed Planner--Retriever--Synthesizer--Formatter pipeline: no fallback, blind retry, and four targeted recovery patterns (tool-grounded retry, deterministic checkpointing, graceful degradation, and cross-agent verification). Across 40 HotpotQA multi-hop questions and multiple trials, three targeted patterns significantly beat the no-fallback baseline on pass rate ($p < 0.01$), at modest added cost. Blind retry and cross-agent verification do not significantly beat doing nothing, despite costing more and stretching tail latency by $3\times$. The three winning patterns are statistically indistinguishable from each other, suggesting several different designs converge on similar reliability gains rather than one clear winner. We release code, data, and logs for reproduction.
+We present an empirical side-by-side comparison of orchestration-level fallback strategies---not new algorithms---on a fixed multi-agent QA pipeline. On 150 HotpotQA questions $\times$ three trials (450 logged runs per condition), we compare two baselines (no fallback, blind retry) against four targeted recovery patterns and one tested composition (P1$+$P2), reporting pass rate, p95 latency, and cost together. Targeted fallbacks that address \emph{common recoverable failure modes} in our Claude Sonnet testbed (especially schema/JSON breakage) significantly beat no fallback under question-level McNemar tests with Bonferroni correction (P1/P2/P3/P5 vs.\ B0: each $p < 10^{-6}$). Blind retry does not ($p{=}0.0265$, n.s.\ after correction). P4 also beats B0 ($p{=}7.2\times 10^{-5}$) but is worse than P3 on pass rate at $2.5\times$ the cost ($p{=}5.1\times 10^{-4}$ for P3 vs.\ P4). The tested P1$+$P2 composition does not beat the best single targeted pattern ($p{=}0.37$ vs.\ P1). A GPT-4o-mini probe on the same question IDs shows no significant lift when structural failures are rare---so gains are conditional on the baseline error profile, not universal. We release code, data, and logs.
 \end{abstract}
 
 \section{Introduction}
 \label{sec:intro}
 
-Multi-agent LLM pipelines fail in the middle of a run as often as they fail at the end. A Planner invents bad sub-questions. A Retriever returns nothing useful. A Synthesizer emits broken JSON or cites a document that was never retrieved. When that happens, most systems do one of two things: stop, or blindly re-run the same stage with the same prompt and hope the next sample is better.
+Multi-agent LLM pipelines fail mid-run: bad sub-questions, empty retrieval, broken JSON, or ungrounded citations. Agent frameworks and production stacks commonly expose \emph{retry loops} or halt on error---Reflexion-style verbal retry~\citep{shinn2023reflexion}, self-consistency sampling~\citep{wang2023selfconsistency}, and targeted re-roll after diagnosis~\citep{zhu2025agentdebug}---but rarely compare orchestration policies on \emph{end-to-end} failure, latency, and cost under identical workloads.
 
-Neither option is a reliability strategy. Stopping wastes the work already done. Blind retry burns tokens and wall time on correlated errors. Production teams are shipping multi-agent stacks anyway---support bots, research agents, tool-using workflows---and the recovery logic is usually ad hoc: a retry counter here, a second ``checker'' agent there, with little evidence for which choice actually cuts end-to-end failure, or what it costs in latency and dollars.
+\textbf{Contribution.} We do not propose new fallback algorithms. We benchmark seven fixed conditions on the same 150 HotpotQA questions~\citep{yang2018hotpotqa} and corpus in a Planner--Retriever--Synthesizer--Formatter LangGraph pipeline: \textbf{baselines} B0 (no fallback) and B1 (blind retry), \textbf{vs.\ four targeted patterns} P1--P4 (tool-grounded retry, checkpointing, degradation, cross-agent verification) and one \textbf{tested composition} P5 (P1 then P2). Prior work validates individual techniques (CRITIC-style tool critique~\citep{gou2024critic}, cascades~\citep{chen2024frugalgpt}, debate~\citep{du2024debate}); what was missing is a multi-objective menu under one testbed---including whether stacking two targeted patterns beats either alone.
 
-This paper asks a direct question: \textbf{which fallback strategies most reduce total task failure in multi-agent LLM pipelines, and what latency and cost tradeoff does each carry?}
+\textbf{Headline findings (Claude Sonnet, this testbed).} Targeted fallbacks beat B0 when they match prevalent recoverable failures (here, largely \texttt{broken\_json}; McNemar on 150 paired questions, Section~\ref{sec:results}). Blind retry does not ($p{=}0.0265$ vs.\ B0, n.s.\ after Bonferroni) and stretches p95 latency. P4 beats B0 ($p{=}7.2\times 10^{-5}$) but trails P3 on pass rate at higher cost. P5 (the only composition we test) does not add significant gain over P1 ($p{=}0.371$). On GPT-4o-mini, B0/P1/P3 are 69\%/68\%/71\% (n.s.)---gains are \emph{failure-mode-dependent}, not universal.
 
-We answer it on one fixed testbed: a Planner $\rightarrow$ Retriever $\rightarrow$ Synthesizer $\rightarrow$ Formatter multi-hop QA pipeline on LangGraph with Claude Sonnet. We compare six conditions on the same 40 HotpotQA questions---no fallback (B0), blind retry (B1), tool-grounded retry (P1), deterministic checkpointing (P2), graceful degradation (P3), and a cross-agent verification gate (P4)---and measure them together on pass rate, p50/p95 latency, and cost per question.
-
-The headline is not subtle. Targeted fallbacks that use external checks or trusted checkpoints (P1, P2, P3) significantly beat doing nothing. Blind retry and the fancier verifier gate do not, despite costing more and stretching the latency tail. P1, P2, and P3 also land statistically indistinguishable from each other: several different designs buy similar gains. The expensive second-agent gate is not automatically worth it.
-
-The rest of the paper is organized as follows. Section~\ref{sec:related} situates the patterns against retry, verification, production RCA, and agent-failure surveys. Sections~\ref{sec:method}--\ref{sec:setup} describe the pipeline, conditions, dataset, and trial design. Section~\ref{sec:results} reports the pooled comparisons and tradeoff figures. Sections~\ref{sec:discussion}--\ref{sec:limitations} say what that means for builders and where the claims stop.
+Section~\ref{sec:related} situates prior work. Sections~\ref{sec:method}--\ref{sec:setup} describe the pipeline and statistics. Section~\ref{sec:results} reports pooled metrics with question-level significance tests. Appendix~\ref{app:extra} holds ablations, failure types, 2WikiMultihopQA, and the GPT-4o-mini table.
 
 \section{Related Work}
 \label{sec:related}
 
-\subsection{Retry, fallback, and self-correction}
-
-A lot of reliability work for LLMs is some form of try again.
-\citet{wang2023selfconsistency} sample multiple reasoning paths and majority-vote the answer. That cuts failure on reasoning tasks, but cost and latency scale with the number of samples. Reflexion~\citep{shinn2023reflexion} stores natural-language reflections from environment feedback and retries with that memory. It helps when you have external scalar or binary feedback. It does not compare several fallback policies on cost and latency together.
-
-CRITIC~\citep{gou2024critic} is closer to what we use in the tool-grounded condition. The model verifies and revises using external tools (search, code execution), in a verify-then-correct loop. Gains depend on the quality of those tool signals, and each iteration adds calls and latency.
-
-Two negative results matter for our design. \citet{huang2024cannot} show that \emph{intrinsic} self-correction---asking the model to fix itself with no external feedback---often fails to help and can make reasoning worse. Earlier positive numbers often leaned on oracle labels or weak baselines. \citet{kamoi2024survey} survey the self-correction literature and reach the same bottleneck: feedback quality. Reliable correction needs external signals, task-specific checks, or fine-tuning---not prompted self-evaluation alone. That is why our targeted patterns (P1--P3) feed stages checkable facts (retrieval miss, bad citation ID, broken schema) rather than ``please fix your answer.''
-
-FrugalGPT~\citep{chen2024frugalgpt} is the main prior work that treats cost and quality as a joint problem. It cascades to stronger models only when a scoring function says the current answer is unreliable. That is model routing for single queries. It is not a comparison of orchestration-level fallbacks when a multi-agent pipeline fails mid-graph, and it does not report p95 latency under agent handoffs.
-
-\subsection{Cross-agent and self-verification}
-
-Multiagent Debate~\citep{du2024debate} has several LLM instances propose answers, critique each other, and converge. Factuality and reasoning improve over a single agent. Token cost and round-trips grow with the number of agents and rounds. That is the same tradeoff space as our cross-agent verification condition (P4), but debate is usually the whole method, not a gate at one handoff inside a fixed pipeline.
-
-LLM-as-a-Judge work~\citep{zheng2023judge} shows strong models can score outputs with high correlation to human preference, and also that judges carry biases (position, verbosity, self-enhancement). Any verifier-gated retry inherits those issues. If the judge is soft or biased, you get false accepts or wasted rejects. We treat that as a reason to measure P4 on failure, latency, and cost together---not only on whether the gate ``looks careful.''
-
-\subsection{Production reliability engineering}
-
-Production work is mostly about finding what went wrong after deploy, not about choosing an in-pipeline fallback policy. LLMRCA~\citep{tan2026llrca} combines metrics, logs, and traces to diagnose performance regressions and silent quality faults in LLM/RAG apps. That is useful measurement substrate: many failures return HTTP 200 and still wrong. \citet{roy2024rca} study ReAct-style agents for cloud incident root-cause analysis, using retrieval and the same diagnostic tools on-call engineers use. Both lines show agentic recovery in operations. Neither benchmarks a menu of orchestration fallbacks (retry vs.\ checkpoint vs.\ degrade vs.\ verify) on task failure, p95 latency, and dollar cost in one controlled multi-agent testbed.
-
-\subsection{Failure characterization surveys}
-
-\citet{wang2024agentsurvey} survey LLM-based autonomous agents and organize construction around profile, memory, planning, and action. That map is useful for where a fallback can hook in (re-plan, re-act, refresh memory). It does not empirically compare mitigation strategies.
-
-\citet{song2026failures} survey LLM reasoning failures by reasoning type and failure class, with mitigation ideas per class. That helps say \emph{what} a fallback should catch. It stops short of ranking orchestration policies under a shared cost and latency budget.
-
-\citet{zhu2025agentdebug} (AgentDebug) attribute agent errors to modules (memory, reflection, planning, action, system) and show that isolating a root cause and re-rolling from there beats undifferentiated retry on their benchmark. That is the closest prior on recovery \emph{inside} agent pipelines. It validates one targeted recovery idea. It does not put several fallback families on the same axes of failure reduction, latency, and cost.
-
-\subsection{Where this leaves a gap}
-
-Taken together, the literature already offers the pieces: vote and retry (Self-Consistency), reflect-and-retry (Reflexion), tool-grounded critique (CRITIC), model cascades (FrugalGPT), multi-agent debate, and LLM-as-judge gating. Most papers validate one technique on accuracy or task success. Few report end-to-end failure rate, p95 latency, and dollar cost on the same runs. Huang and Kamoi show why blind intrinsic self-fix is a bad default. CRITIC, Reflexion, and debate show recovery can work when feedback is well-sourced. What is still missing is a side-by-side answer to \emph{which fallback to use when}, under a fixed multi-agent workload and a joint reliability budget.
-
-Production RCA work diagnoses deployed systems after the fact. Agent and reasoning-failure surveys explain failure modes and where hooks might attach. FrugalGPT prices model routing, not cascading errors and verification gaps inside a Planner$\rightarrow$Retriever$\rightarrow$Synthesizer$\rightarrow$Formatter graph. AgentDebug shows targeted recovery can beat blind retry for one mechanism.
-
-That is where this paper comes in. We treat fallback strategies as a design space---no fallback, blind retry, tool-grounded retry, deterministic checkpointing, graceful degradation, and cross-agent verification---applied at orchestration boundaries in one multi-agent QA pipeline, and we measure them together on pass rate, latency, and cost. Prior work proposes and validates individual patterns. We compare those options side by side and show what each costs.
+Much LLM reliability work is try-again: Self-Consistency~\citep{wang2023selfconsistency} votes over samples; Reflexion~\citep{shinn2023reflexion} retries with verbal memory; CRITIC~\citep{gou2024critic} revises using tool signals. Intrinsic self-correction without external feedback often fails~\citep{huang2024cannot,kamoi2024survey}, motivating our tool/schema checks. FrugalGPT~\citep{chen2024frugalgpt} budgets cost and quality via cascades but not mid-graph orchestration fallbacks. Multiagent Debate~\citep{du2024debate} and LLM-as-judge~\citep{zheng2023judge} sit in the same tradeoff space as P4. Production RCA~\citep{tan2026llrca,roy2024rca} diagnoses deployed systems after the fact. Agent surveys~\citep{wang2024agentsurvey,song2026failures} map failure modes; AgentDebug~\citep{zhu2025agentdebug} shows targeted re-roll can beat undifferentiated retry for one mechanism. Few works report failure rate, p95 latency, and dollar cost on the same runs for several orchestration fallbacks on one multi-agent testbed.
 
 \section{Method}
 \label{sec:method}
 
 \subsection{Testbed}
-
-We evaluate fallback patterns on a fixed multi-agent multi-hop QA pipeline. The pipeline has four stages, in order: \textbf{Planner}, \textbf{Retriever}, \textbf{Synthesizer}, and \textbf{Formatter}. The Planner breaks a question into sub-questions. The Retriever pulls documents from a fixed local corpus (no live web search). The Synthesizer drafts an answer with citations. The Formatter emits the final structured answer.
-
-We built the graph in LangGraph and ran all LLM stages with Claude Sonnet (\texttt{claude-sonnet-4-6}) at temperature 0, except where a pattern deliberately switches models (P3's cheap tier). Each stage writes typed fields into a shared state object, so a fallback can see what failed and where without guessing.
-
-End-to-end success is a correct final answer against a labeled gold string (scoring details in Section~\ref{sec:setup}). The design goal was a small production-like workflow where stage failures are easy to locate and recover from.
+Four stages: \textbf{Planner}, \textbf{Retriever}, \textbf{Synthesizer}, \textbf{Formatter}. Retriever searches a fixed local Hotpot-derived corpus (no live web). LLM stages use Claude Sonnet (\texttt{claude-sonnet-4-6}) at temperature 0, except P3's rare Haiku path. Typed shared state exposes stage failures to fallbacks. Success is a scored-correct final answer (Section~\ref{sec:setup}).
 
 \subsection{Conditions}
+Seven conditions represent structurally distinct recovery mechanisms---not an exhaustive design-space search; self-consistency and debate are related but distinct (Section~\ref{sec:related}).
 
-We ran six conditions on the same questions and corpus. B0 and B1 are baselines. P1--P4 are the fallback patterns. Here we summarize what each condition does.
+\textbf{B0 --- No fallback.} One pass; hard error or wrong final answer counts as failure.
 
-\textbf{B0 --- No fallback.} The pipeline runs once. Any hard stage error, or a wrong final answer, counts as failure. No retries. This is the reference point for cost and latency.
+\textbf{B1 --- Blind retry.} Re-run failing stage/graph up to a cap with the same prompts/tools; no new evidence or rollback.
 
-\textbf{B1 --- Blind retry.} On stage failure (or a failed final check), we re-run the same stage or the full graph up to a fixed number of times, with the same prompts and tools. No new evidence, no rollback to a trusted checkpoint, no second agent. We include it as the obvious ``just retry'' baseline that targeted patterns should improve on, on both reliability and cost.
+\textbf{P1 --- Tool-grounded retry.} External checks (retrieval, citation IDs, JSON schema); capped stage re-run with check feedback.
 
-\textbf{P1 --- Tool-grounded retry-with-verification.} After a stage produces a candidate output, we run cheap external checks: empty or low-relevance retrieval, citation IDs missing from the retrieved set, schema/JSON parse failures. If a check fails, we re-run only that stage and append the check result as feedback (CRITIC-style verify-then-correct). Retries are capped. This is not ``please fix your answer'' with no new signal.
+\textbf{P2 --- Deterministic checkpointing.} Restore last trusted checkpoint and re-execute forward after failure.
 
-\textbf{P2 --- Deterministic checkpointing.} After a stage passes verification, we save a checkpoint. On hard failure or verification failure at stage $i$, we discard untrusted state from $i$ onward, restore the last trusted checkpoint, and re-execute forward from there (optionally with a one-shot tool hint). We do not keep polluted intermediate memory.
+\textbf{P3 --- Graceful degradation.} Simplify path (e.g., skip planning, Haiku cascade) after repeated failure or budget exhaustion.
 
-\textbf{P3 --- Graceful degradation.} After repeated recoveries fail at a stage, or a per-question token budget is exceeded, we switch to a simpler path: skip multi-hop planning, cascade remaining stages to a cheaper model (Haiku), and/or return a partial answer marked low-confidence. The task is still scored as pass/fail on the gold answer. When the Haiku path runs, those stages are priced at Haiku rates in the logs; the P3 cost and latency numbers we report already include that mix (they are not Sonnet-only totals with Haiku ignored). In the pooled runs, Haiku was used on a small minority of questions---most P3 runs never left the Sonnet path---so the average cost stays close to P1/P2.
+\textbf{P4 --- Cross-agent verification gate.} Second Verifier agent before formatting; one capped Synthesizer re-run on reject.
 
-\textbf{P4 --- Cross-agent verification gate.} Before the Synthesizer draft goes to the Formatter, a second Verifier agent (distinct system prompt, same Sonnet model) sees the question, retrieved evidence, and draft. It must \textsc{Accept}, \textsc{Reject\_With\_Critique}, or \textsc{Propose\_Correction}. On reject, the Synthesizer re-runs once with the critique, still bound to the retrieved evidence. Reject-and-retry is capped at one round \emph{per question}, so a single question cannot loop. That second synthesizer pass does fire on some questions; it just cannot repeat on the same item.
+\textbf{P5 --- Composed P1$+$P2.} P1 tool-grounded retry first; on continued failure, P2 checkpoint rollback (cap 2 retries/stage). Most questions recover within P1's capped checks and never enter the checkpoint branch; when they do, rollback avoids stacking the long blind-retry chains that inflate B1's tail, which helps explain P5's lower p95 than P1 despite extra orchestration logic.
 
-We evaluate each pattern as its own condition, not as stacked compositions. Composition (e.g.\ P2$+$P1, then P3) is left for later work once single-pattern effects are clear.
-
-\subsection{Why external / tool-grounded feedback (P1--P3)}
-
-P1--P3 deliberately avoid intrinsic self-correction as the main recovery signal. \citet{huang2024cannot} show that when models are asked to fix their own reasoning without external feedback, they often do not improve and can get worse. \citet{kamoi2024survey} make the same point in survey form: reliable correction needs external signals, task-specific checks, or other grounding---not prompted self-evaluation alone.
-
-So when P1 retries a stage, the feedback is a checkable fact (empty retrieval, bad citation ID, broken JSON schema), not ``try again.'' P2 only writes checkpoints after an external pass. P3 degrades on budget or repeated external failures, not on the model's own confidence score. P4 is different: it uses a second agent as a gate. That is still external to the Synthesizer's first draft, but it is an LLM judge rather than a tool check, and we treat it as a separate (expensive) pattern family.
+P1--P3 and P5 use external signals rather than intrinsic self-correction~\citep{huang2024cannot,kamoi2024survey}; P4 is an LLM judge.
 
 \section{Experimental Setup}
 \label{sec:setup}
 
-\subsection{Dataset}
+\textbf{Dataset.} 150 HotpotQA distractor validation questions~\citep{yang2018hotpotqa} (short gold; bridge-preferred filters). Corpus: 300 supporting + 20 distractor documents; retriever searches only this set.
 
-We use 40 multi-hop questions from HotpotQA (distractor setting, validation split), loaded via Hugging Face \texttt{datasets}. Selection filters, recorded in the subset metadata:
-\begin{itemize}
-  \item Short gold answers (at most 60 characters / 6 tokens)
-  \item Yes/no answers excluded
-  \item At least two supporting titles
-  \item Bridge-type questions preferred; then sort and take the first 40
-\end{itemize}
+\textbf{Scoring.} Normalized token-coverage against gold (exact, substring, or gold-token coverage). We do not run a separate semantic-equivalence or factuality judge on the main metric; paraphrases can fail and citation quality is not scored directly (Section~\ref{sec:limitations}). All conditions share the same scorer.
 
-The retrieval corpus has 100 documents: 80 supporting documents tied to the selected questions, plus 20 distractor documents (sorted titles, stride subsample). The Retriever only searches this fixed corpus, so runs are reproducible and do not depend on a live search API.
+\textbf{Trials.} Three independent trials on the same 150 questions (450 logged runs per condition). Pass rates, Wilson 95\% CIs, latency, and cost in Table~\ref{tab:pooled} and Figures~\ref{fig:pass}--\ref{fig:latency} pool all 450 runs per condition.
 
-\subsection{Scoring}
+\textbf{Inferential testing.} Because the three trials reuse the same 150 questions, run-level outcomes are not independent. All primary pass-rate significance tests are therefore performed at the question level: for each condition and question, we label pass if a \emph{majority} of that question's trials pass, yielding 150 paired binary outcomes per condition pair. We apply two-sided McNemar's test (with continuity correction) and Bonferroni correction over 21 condition pairs ($\alpha{=}0.05/21{=}0.002381$). Table~\ref{tab:pairwise} reports $\Delta$pp and Cohen's $h$ on these question-level majority rates.
 
-A question passes if the model's final answer matches the gold string under a normalized token-coverage rule: exact match, substring containment either way, or every gold token appearing in the prediction. That is lenient toward verbose answers and strict about covering the gold content.
-
-This scorer is a limitation. It can mark a factually reasonable answer as fail when the wording diverges from Hotpot's short gold span, and it does not check citation quality on its own. We return to that in Section~\ref{sec:limitations}; the same scorer is used for every condition so relative comparisons stay fair.
-
-\subsection{Trial design and statistics}
-
-All LLM calls use temperature 0. We still ran multiple full trials because scoring flukes and rare parse paths can move a few questions.
-\begin{itemize}
-  \item B0, B1, P1, P2, P3: three independent trials of the same 40 questions (pooled $n = 120$ question-outcomes per condition)
-  \item P4: two trials (pooled $n = 80$)
-\end{itemize}
-
-The third trial for B0/B1/P1/P2/P3 was targeted after the two-trial screen showed edge-band significance for some B0 comparisons; P4 was not re-run.
-
-For pass rate, we pool question outcomes across trials and compare conditions with a two-sided two-proportion $z$-test and Fisher's exact test ($\alpha = 0.05$). We do not report a run-level standard deviation from two or three trials. We did not apply multiple-comparison correction; pairwise tests are an exploratory screen and should be read that way.
-
-For latency and cost we report per-trial values and simple averages. With only two or three trial totals, we do not attach confidence intervals or claim significant cost differences from the trial sample alone.
-
-\subsection{Metrics}
-
-We track three primary metrics:
-\begin{enumerate}
-  \item \textbf{Pass rate} --- fraction of questions scored correct (pooled across trials)
-  \item \textbf{Latency} --- end-to-end wall time per question; we report p50 and p95 (pooled question-level distributions, and per-trial p50/p95 for inspection)
-  \item \textbf{Cost} --- estimated USD from logged token counts and published Claude pricing; we report total cost per trial and average cost per question
-\end{enumerate}
-
-Secondary logging for P4 separates Verifier token/cost from the Synthesizer so verification overhead can be stated on its own line. That does not change the primary cost metric above.
+\textbf{Metrics.} Pass rate, end-to-end latency (p50/p95), average cost per question.
 
 \section{Results}
 \label{sec:results}
 
 \subsection{Headline}
-
-The main result is simple. The three targeted fallback patterns---tool-grounded retry (P1), deterministic checkpointing (P2), and graceful degradation (P3)---raised pass rate over the no-fallback baseline (B0) by a clear margin, at a modest cost increase. Blind retry (B1) and cross-agent verification (P4) did not beat B0 on pass rate at $\alpha = 0.05$, even though both cost more and both stretch the latency tail.
-
-Pass rates below are pooled question outcomes ($n = 120$ for B0/B1/P1/P2/P3; $n = 80$ for P4). Cost and latency are the pooled figures from the same runs. Pairwise tests are two-sided two-proportion $z$-tests and Fisher's exact tests, as in Section~\ref{sec:setup}.
+Table~\ref{tab:pooled} summarizes pooled runs (450 per condition). Table~\ref{tab:pairwise} lists McNemar tests on 150 paired questions. P1, P2, P3, and P5 each beat B0 with $p < 10^{-6}$. B1 does not ($p{=}0.0265$, n.s.\ after Bonferroni). P4 beats B0 ($p{=}7.2\times 10^{-5}$) but loses to P3 ($p{=}5.1\times 10^{-4}$) at $2.5\times$ the cost.
 
 \begin{table}[t]
-  \caption{Pooled results across trials (pass rate, latency, cost).}
+  \caption{Pooled results across three trials (450 runs per condition). Pass\% pools all runs; inferential tests use 150 paired questions (Table~\ref{tab:pairwise}).}
   \label{tab:pooled}
   \centering
   \small
   \begin{tabular}{lrrrrr}
     \toprule
-    Cond & $n$ & Pass\% & p50 (ms) & p95 (ms) & \$/q \\
+    Cond & Runs & Pass\% & p50 (ms) & p95 (ms) & \$/q \\
     \midrule
-    B0 & 120 & 60.0 & 6512 & 10397 & 0.0060 \\
-    B1 & 120 & 64.2 & 7139 & 34506 & 0.0108 \\
-    P1 & 120 & 75.8 & 7093 & 10398 & 0.0075 \\
-    P2 & 120 & 75.8 & 6926 & 9591  & 0.0075 \\
-    P3 & 120 & 78.3 & 7236 & 10369 & 0.0075 \\
-    P4 & 80  & 70.0 & 10427 & 30708 & 0.0164 \\
+    B0 & 450 & 55.3 & 6440 & 11180 & 0.0052 \\
+    B1 & 450 & 61.1 & 6889 & 30793 & 0.0085 \\
+    P1 & 450 & 76.0 & 7951 & 20528 & 0.0072 \\
+    P2 & 450 & 76.2 & 8047 & 18444 & 0.0073 \\
+    P3 & 450 & 78.2 & 7764 & 18444 & 0.0073 \\
+    P4 & 450 & 68.2 & 12366 & 33553 & 0.0183 \\
+    P5 & 450 & 74.7 & 7321 & 12338 & 0.0071 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 \begin{table}[t]
-  \caption{Selected pairwise pass-rate tests (two-sided; $\alpha = 0.05$; no multiple-comparison correction).}
+  \caption{Selected pairwise tests on 150 Hotpot questions (majority pass per question; McNemar; Bonferroni $\alpha{=}0.002381$).}
   \label{tab:pairwise}
   \centering
   \small
-  \setlength{\tabcolsep}{4pt}
-  \begin{tabular}{lrrrrr}
+  \setlength{\tabcolsep}{3.5pt}
+  \begin{tabular}{lrrrr}
     \toprule
-    Comparison & $\Delta$pp & $z$ & $p(z)$ & $p$(Fisher) & sig \\
+    Comparison & $\Delta$pp & $p$ & Cohen's $h$ & sig \\
     \midrule
-    P1 vs B0 & $+15.8$ & $2.627$ & $0.0086$ & $0.0125$ & ** \\
-    P2 vs B0 & $+15.8$ & $2.627$ & $0.0086$ & $0.0125$ & ** \\
-    P3 vs B0 & $+18.3$ & $3.075$ & $0.0021$ & $0.0032$ & ** \\
-    P4 vs B0 & $+10.0$ & $1.443$ & $0.1489$ & $0.1766$ & ns \\
-    B1 vs B0 & $+4.2$  & $0.665$ & $0.5059$ & $0.5947$ & ns \\
-    P1 vs B1 & $+11.7$ & $1.972$ & $0.0486$ & $0.0667$ & * \\
-    P3 vs B1 & $+14.2$ & $2.425$ & $0.0153$ & $0.0221$ & * \\
-    P1 vs P2 & $+0.0$  & $0.000$ & $1.0000$ & $1.0000$ & ns \\
-    P1 vs P3 & $-2.5$  & $-0.461$ & $0.6450$ & $0.7589$ & ns \\
-    P2 vs P3 & $-2.5$  & $-0.461$ & $0.6450$ & $0.7589$ & ns \\
-    P3 vs P4 & $+8.3$  & $1.333$ & $0.1824$ & $0.1876$ & ns \\
+    P1 vs B0 & $+21.3$ & $1.06\times 10^{-7}$ & $0.45$ & ** \\
+    P2 vs B0 & $+20.7$ & $8.14\times 10^{-7}$ & $0.44$ & ** \\
+    P3 vs B0 & $+24.0$ & $5.43\times 10^{-9}$ & $0.52$ & ** \\
+    P5 vs B0 & $+19.3$ & $4.93\times 10^{-7}$ & $0.41$ & ** \\
+    P4 vs B0 & $+14.7$ & $7.23\times 10^{-5}$ & $0.30$ & ** \\
+    B1 vs B0 & $+6.0$  & $0.0265$ & $0.12$ & ns \\
+    P3 vs P1 & $+2.7$  & $0.134$ & --- & ns \\
+    P5 vs P1 & $-2.0$  & $0.371$ & --- & ns \\
+    P4 vs P3 & $-9.3$  & $5.12\times 10^{-4}$ & --- & ** \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\subsection{Pass rate}
-
-Figure~\ref{fig:pass} shows pass rate by condition, with error bars spanning the trial min--max and significance markers vs.\ B0.
+\subsection{Pass rate, cost, and latency}
+Figure~\ref{fig:pass} shows pooled pass rates with Wilson 95\% CIs (450 runs). B0 55.3\%; P1--P3/P5 74.7\%--78.2\%; B1 61.1\%; P4 68.2\%. P5 is not significantly above P1 ($p{=}0.371$): we find \emph{no additional benefit from the tested P1$+$P2 composition} (we did not evaluate other compositions).
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.95\linewidth]{figures/fig1_pass_rate.png}
-  \caption{Pass rate by condition. Error bars span trial min--max; markers indicate significance vs.\ B0.}
+  \includegraphics[width=0.88\linewidth]{figures/fig1_pass_rate.png}
+  \caption{Pooled pass rate with Wilson 95\% CIs. Markers vs.\ B0: McNemar on 150 paired questions, Bonferroni $\alpha{=}0.002381$.}
   \label{fig:pass}
 \end{figure}
 
-B0 sits at 60.0\% (72/120). P1 and P2 both land at 75.8\% (91/120)---a $+15.8$ percentage-point gain over B0. Both comparisons are significant ($z = 2.627$, $p(z) = 0.0086$; Fisher $p = 0.0125$). P3 is a bit higher at 78.3\% (94/120), $+18.3$\,pp over B0, and the strongest of the three against the baseline ($z = 3.075$, $p(z) = 0.0021$; Fisher $p = 0.0032$).
-
-B1 reaches 64.2\% (77/120). That is only $+4.2$\,pp over B0, and it is not significant ($p(z) = 0.5059$; Fisher $p = 0.5947$). P4 reaches 70.0\% (56/80), $+10.0$\,pp over B0, also not significant ($p(z) = 0.1489$; Fisher $p = 0.1766$). P4's sample is smaller (two trials), but the point estimate still does not clear the bar.
-
-So on pass rate alone: P1, P2, and P3 beat doing nothing. Blind retry and the verifier gate do not, at least not at a level we can defend from these data.
-
-\subsection{Cost vs accuracy}
-
-Figure~\ref{fig:pareto} plots average cost per question against pass rate.
+Figure~\ref{fig:pareto} (cost vs.\ accuracy) and Figure~\ref{fig:latency} (p95 latency) show the P1--P3/P5 cluster near \$0.007/q with strong pass rates, while B1 and P4 pay more for weaker accuracy and longer tails.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.95\linewidth]{figures/fig2_cost_vs_accuracy_pareto.png}
-  \caption{Cost vs.\ accuracy (Pareto view). Average cost per question against pooled pass rate.}
+  \includegraphics[width=0.88\linewidth]{figures/fig2_cost_accuracy.png}
+  \caption{Cost vs.\ accuracy. Dashed box: P1--P3/P5 cluster.}
   \label{fig:pareto}
 \end{figure}
 
-B0 is the cheap, lower-accuracy corner at \$0.0060/q and 60.0\%. P1, P2, and P3 sit together near \$0.0075/q with pass rates of 75.8\%, 75.8\%, and 78.3\%. That is the good-value cluster: roughly a quarter more spend than B0 for a fifteen-to-eighteen point pass-rate lift.
-
-B1 costs \$0.0108/q for 64.2\% pass rate---almost twice B0's cost for a gain that is not significant. P4 is the expensive outlier at \$0.0164/q and 70.0\% pass rate. Both sit in the dominated region of Figure~\ref{fig:pareto}: higher cost than P1--P3, with worse or no better accuracy than that cluster. If the goal is reliability per dollar, B1 and P4 lose to the cheaper targeted patterns.
-
-(These cost figures are descriptive. With only two or three trial totals per condition, we do not claim significant cost differences from a formal test on the trial sample.)
-
-\subsection{Latency}
-
-Figure~\ref{fig:latency} shows pooled p95 end-to-end latency on a log scale.
-
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.95\linewidth]{figures/fig3_p95_latency.png}
-  \caption{Pooled p95 end-to-end latency by condition (log scale).}
+  \includegraphics[width=0.88\linewidth]{figures/fig3_latency.png}
+  \caption{Pooled p95 latency (log scale). B1 and P4 stretch the tail vs.\ B0.}
   \label{fig:latency}
 \end{figure}
 
-B0, P1, P2, and P3 stay near ten seconds at p95: 10397\,ms, 10398\,ms, 9591\,ms, and 10369\,ms. B1 and P4 do not. B1's p95 is 34506\,ms ($\sim$34.5\,s). P4's is 30708\,ms ($\sim$30.7\,s). That is roughly three times the rest of the field.
+\subsection{Composition, stages, and P4}
+P5 does not significantly outperform P1/P2/P3 ($p > 0.13$ among targeted cluster). P1--P3 shift failures from Synthesizer to Formatter (Appendix~\ref{app:extra}, Figure~\ref{fig:stage}). P4's verifier false-accept rate is 23.6\% (Figure~\ref{fig:p4conf}), explaining weak cost--reliability tradeoffs despite significance vs.\ B0.
 
-The reasons match how each condition recovers. B1 re-runs the same stage or graph on failure, up to its retry cap, with no new evidence and no early targeted exit. Failed questions stack sequential retries, which fattens the tail even when the median stays closer to the pack (B1 p50 is 7139\,ms). P4 puts a full Verifier agent call on the critical path before the Formatter, and on reject it may run a second Synthesizer pass (capped at one round per question). That extra agent work shows up as both higher average cost and a long p95, whether or not the gate eventually helps the answer.
-
-\subsection{P1, P2, and P3 are interchangeable on pass rate}
-
-P1, P2, and P3 are statistically indistinguishable from each other on pooled pass rate. P1 vs.\ P2: both 75.8\%, Fisher $p = 1.0000$. P1 vs.\ P3: 75.8\% vs.\ 78.3\%, Fisher $p = 0.7589$. P2 vs.\ P3: same gap, Fisher $p = 0.7589$.
-
-We are not claiming one of these three is best. The finding is that three different targeted designs---tool checks with stage retry, deterministic checkpointing, and degrade-on-exhaustion---land in the same place: clear gains over B0, similar cost, similar latency tails. Choosing among them is more about engineering fit than about a winner on this benchmark.
-
-\subsection{P4: expensive verification without a significant win}
-
-P4 is the counter-intuitive result. It is the most elaborate pattern in the set: a second LLM gates the Synthesizer draft before formatting, with accept / reject-with-critique / propose-correction, plus a capped re-synth on reject. It is also the most expensive condition (\$0.0164 per question) and one of the two worst latency tails ($\sim$30.7\,s p95).
-
-It did not significantly outperform B0 on pass rate (70.0\% vs.\ 60.0\%; $p(z) = 0.1489$, Fisher $p = 0.1766$). Against P1--P3 it is numerically lower and not significantly different from them either (e.g.\ P3 vs.\ P4: Fisher $p = 0.1876$), while costing more than twice as much per question as that cluster.
-
-So in this setup, paying for a full cross-agent verification gate did not buy a defensible reliability gain over doing nothing---and it lost on cost and latency to simpler tool-grounded and checkpoint-style fallbacks. That is a real finding for the paper, not a failed run to soft-pedal.
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.62\linewidth]{figures/fig5_p4_confusion.png}
+  \caption{P4 verifier confusion (450 pooled runs). False accepts: 23.6\%.}
+  \label{fig:p4conf}
+\end{figure}
 
 \section{Discussion}
 \label{sec:discussion}
 
-If you are building a multi-agent pipeline, the practical takeaway is narrow and useful. Do not default to blind retry. It did not significantly beat no fallback on pass rate, and it blew out p95 latency because failed questions stack sequential re-runs with no new evidence. Do not assume a cross-agent verifier is automatically ``more reliable'' because it looks sophisticated. In our runs it was the most expensive condition and one of the two worst latency tails, without a significant pass-rate win over doing nothing.
+Choose fallbacks to match \emph{observed} failure modes. On Claude Sonnet here, schema/JSON checks recover large structural mass; on GPT-4o-mini (Appendix), the same checks barely move pass rate when that mass is absent. Do not default to blind retry (n.s.\ vs.\ B0 after correction; heavy p95). Do not assume a verifier gate is automatically safer: P4 is significant vs.\ B0 ($p{=}7.2\times 10^{-5}$) but has lower pass rate and higher cost than P3 ($p{=}5.1\times 10^{-4}$ for P3 vs.\ P4).
 
-What worked was simpler: tool- or schema-grounded stage checks with a capped retry (P1), rollback to a last trusted checkpoint (P2), or degrade when retries and budget are exhausted (P3). Those paths raised pass rate over B0 at about \$0.0075 per question versus \$0.0060 for B0---more spend, but nowhere near B1 or P4---and kept p95 latency near ten seconds instead of thirty.
+Tool/schema checks with capped retry (P1), checkpoint rollback (P2), degrade (P3), or the tested P1-then-P2 composition (P5) cluster near \$0.007/q with much better pass rates than B0. Reliability looks like orchestration hygiene---external checks, checkpoints, degrade paths---not ``add another agent.''
 
-That P1, P2, and P3 are statistically indistinguishable matters for how you read the paper. This is not an accuracy horse race among three winners. It is evidence that several targeted designs converge on similar reliability gains when feedback is external and recovery is scoped to the failing stage or a trusted prefix. The engineering choice is which mechanism fits your graph---stage verify-and-retry, checkpoint restore, or degrade-on-exhaustion---not which one ``won'' HotpotQA by a point or two.
-
-P4's underperformance is easier to understand once you take LLM-as-judge limits seriously. Section~\ref{sec:related} already notes that judge models carry biases and soft accepts. We hit a concrete version of that in development: the first verifier prompt rubber-stamped almost every draft (\textsc{Accept} on every question that reached the gate), so the ``gate'' was not gating. After we tightened the checklist, added deterministic citation checks, and fail-closed on parse errors, the verifier did reject and occasionally re-ran the Synthesizer---but pooled pass rate still did not clear significance against B0, while cost and p95 stayed high. A second LLM on the critical path is not free, and it is only as useful as its willingness to say no for the right reasons. That is a design lesson, not just a non-significant $p$-value.
-
-More broadly, multi-agent reliability looks less like ``add another agent'' and more like orchestration hygiene: external checks at stage boundaries, immutable checkpoints after trusted passes, and a planned degrade path when recovery fails. Patterns from CRITIC-style tool critique and AgentDebug-style targeted re-roll beat no-fallback here, and look better than blind retry on cost and latency---though the pass-rate edge over blind retry itself sits right at the edge of significance, not a clean win. Patterns that multiply full agent calls without cheap external signals did not pay for themselves on this testbed. Builders should budget verification the way they budget any other stage---against measured failure, latency, and cost---not against how careful the architecture diagram looks.
+\paragraph{Reproducibility.}
+Code, analysis scripts, and logs: \url{https://github.com/Ashar086/llm-fallback-reliability}.
 
 \section{Limitations}
 \label{sec:limitations}
 
-These claims have sharp edges.
+\textbf{Scope.} One primary model family (Claude Sonnet; Haiku on P3's rare path), one main benchmark (150 unique HotpotQA questions), one pipeline topology. Gains on Claude are strongly driven by structural failures (\texttt{broken\_json}); GPT-4o-mini weakens generalization (Appendix).
 
-\textbf{Narrow task and small set.} We used 40 HotpotQA multi-hop questions and one pipeline shape (plan $\rightarrow$ retrieve $\rightarrow$ synthesize $\rightarrow$ format). Coding agents, support triage, or tool-heavy workflows may fail differently. We do not claim the same ranking holds there.
+\textbf{Statistics.} We report pooled 450-run descriptives but test significance on 150 paired questions; trials are not independent.
 
-\textbf{Scorer.} Pass/fail uses normalized token-coverage matching against short gold answers. It can fail a reasonable paraphrase and does not score citation quality on its own. Relative comparisons across conditions stay fair because every condition uses the same scorer; absolute pass rates should be read with that limit in mind.
+\textbf{Scoring.} Token-coverage gold matching is brittle; automated semantic equivalence or factuality scoring is future work.
 
-A manual spot-check of B0's six score-fail questions (the same fails recur across trials) found no clear model hallucinations. Most were name-form mismatches---for example ``Kareena Kapoor'' versus gold ``Kareena Kapoor Khan''---or cases where the retrieved evidence backed the model's answer over Hotpot's stated gold (two cases: a Beethoven work mislabeled in the gold set, and a diplomatic-mission question where the gold tribe name conflicted with the supporting document). So reported pass rates are, if anything, a slight underestimate of true answer quality, not an overestimate---and the same scorer and gold set are used identically across all six conditions.
+\textbf{Composition.} Only P1$+$P2 was composed; other stacks may differ.
 
-\textbf{Single patterns only.} We did not test compositions (e.g.\ P1 inside P2, then P3 as last resort). Stacked policies might do better---or cost more for little gain. That is left open.
+\textbf{Failure taxonomy.} Covers structural/content failures in this testbed, not infrastructure failures (timeouts, rate limits, API outages, vector-DB failures).
 
-\textbf{Modest trial counts.} B0/B1/P1/P2/P3 have three trials (pooled $n = 120$); P4 has two ($n = 80$). That is enough for the comparisons we report at temperature 0, and weaker than large multi-seed ML evaluations. A few pairwise edges (notably P1/P2 vs.\ B1) still sit near the decision boundary.
-
-\textbf{Single base model.} All primary stages use Claude Sonnet (\texttt{claude-sonnet-4-6}), with Haiku only on P3's rare cheap path. Other models may reject, parse, or judge differently. Pattern rankings could shift.
-
-\textbf{No multiple-comparison correction.} Pairwise pass-rate tests are an exploratory screen at $\alpha = 0.05$ without family-wise adjustment. Significant stars should be read that way, not as a fully corrected tournament among six conditions.
-
-\begin{ack}
+\section*{Acknowledgments and Disclosure of Funding}
 This work received no external funding.
-\end{ack}
 
 \bibliographystyle{plainnat}
 \bibliography{references}
+
+\appendix
+\section{Additional analyses}
+\label{app:extra}
+
+\subsection{P1 check ablation}
+\label{sec:p1-ablation}
+P1 combines retrieval, citation, and schema checks. One-check ablations on 50 Hotpot questions $\times$ two trials ($n{=}100$ runs per variant):
+
+\begin{table}[t]
+  \caption{P1 check ablation ($n{=}100$ runs). Wilson 95\% CIs; $z$-tests vs.\ full P1 and B0 on same IDs.}
+  \label{tab:p1-ablation}
+  \centering
+  \small
+  \setlength{\tabcolsep}{2.8pt}
+  \begin{tabular}{lrrll}
+    \toprule
+    Variant & Pass\% [Wilson 95\%] & $n$ & vs.\ full P1 & vs.\ B0 \\
+    \midrule
+    B0 & 62.0 [52.2, 70.9] & 100 & $-17.0$\,pp, $p{=}0.0084$ & --- \\
+    P1-full & 79.0 [70.0, 85.8] & 100 & --- & $+17.0$\,pp, $p{=}0.0084$ \\
+    P1R (retrieval-only) & 61.0 [51.2, 70.0] & 100 & $-18.0$\,pp, $p{=}0.0055$ & $-1.0$\,pp, $p{=}0.8845$ \\
+    P1C (citation-only) & 57.0 [47.2, 66.3] & 100 & $-22.0$\,pp, $p{=}0.0009$ & $-5.0$\,pp, $p{=}0.4714$ \\
+    P1S (schema-only) & 74.0 [64.6, 81.6] & 100 & $-5.0$\,pp, $p{=}0.4044$ & $+12.0$\,pp, $p{=}0.0689$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Schema-only carries most single-check lift; retrieval/citation alone do not beat B0.
+
+\subsection{Terminal failure types}
+\label{sec:failure-types}
+B0: 154 \texttt{broken\_json} (34.2\%) vs.\ 47 \texttt{wrong\_answer} (10.4\%). P1--P3 collapse \texttt{broken\_json} to 0--6 runs; \texttt{wrong\_answer} rises to 21.8--22.7\% as runs complete and are scored.
+
+\begin{table}[t]
+  \caption{Terminal failure types (count and \% of 450 runs per condition).}
+  \label{tab:failure-types}
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{2.8pt}
+  \begin{tabular}{lrrrrrrr}
+    \toprule
+    Failure type & B0 & B1 & P1 & P2 & P3 & P4 & P5 \\
+    \midrule
+    broken\_json & 154 (34.2\%) & 130 (28.9\%) & 6 (1.3\%) & 7 (1.6\%) & 0 (0.0\%) & 10 (2.2\%) & 5 (1.1\%) \\
+    wrong\_answer & 47 (10.4\%) & 45 (10.0\%) & 102 (22.7\%) & 100 (22.2\%) & 98 (21.8\%) & 133 (29.6\%) & 109 (24.2\%) \\
+    \midrule
+    Total fails & 201 (44.7\%) & 175 (38.9\%) & 108 (24.0\%) & 107 (23.8\%) & 98 (21.8\%) & 143 (31.8\%) & 114 (25.3\%) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.92\linewidth]{figures/fig6_error_analysis.png}
+  \caption{Terminal failure-type heatmap (\% of runs).}
+  \label{fig:error}
+\end{figure}
+
+\subsection{Stage-failure heatmap}
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.92\linewidth]{figures/fig4_stage_heatmap.png}
+  \caption{Stage-failure heatmap. P1--P3 shift mass from Synthesizer to Formatter.}
+  \label{fig:stage}
+\end{figure}
+
+\subsection{2WikiMultihopQA validation}
+\label{sec:2wiki}
+B0/B1/P1/P3 on 50 2Wiki questions ($n{=}100$ runs/condition): ranking holds (P3 $+30$\,pp vs.\ B0, $p{\approx}1.6\times 10^{-5}$; P1 $+18$\,pp, $p{=}0.008$; B1 n.s.).
+
+\subsection{GPT-4o-mini probe}
+Same 50 Hotpot IDs ($n{=}100$/condition): B0 69\% (69/100; Wilson CI $[59.4\%, 77.2\%]$), P1 68\% ($-1.0$\,pp vs.\ B0, $p{=}0.879$), P3 71\% ($+2.0$\,pp, $p{=}0.758$). No significant lift over B0; baseline \texttt{broken\_json} is rare, so tool checks have little to repair.
 
 \end{document}

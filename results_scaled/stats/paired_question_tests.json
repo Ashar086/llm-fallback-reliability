@@ -1,0 +1,225 @@
+{
+  "bonferroni_alpha": 0.002380952380952381,
+  "definition": "Per question: pass if majority of trials pass (>= ceil(n_trials/2)). McNemar test on paired majority outcomes across 150 questions; Wilcoxon signed-rank on paired trial-pass fractions.",
+  "per_condition": {
+    "B0": {
+      "n_questions": 150,
+      "pass_rate_majority": 0.5466666666666666,
+      "pass_rate_pooled": 0.5533333333333333
+    },
+    "B1": {
+      "n_questions": 150,
+      "pass_rate_majority": 0.6066666666666667,
+      "pass_rate_pooled": 0.6111111111111112
+    },
+    "P1": {
+      "n_questions": 150,
+      "pass_rate_majority": 0.76,
+      "pass_rate_pooled": 0.76
+    },
+    "P2": {
+      "n_questions": 150,
+      "pass_rate_majority": 0.7533333333333333,
+      "pass_rate_pooled": 0.7622222222222222
+    },
+    "P3": {
+      "n_questions": 150,
+      "pass_rate_majority": 0.7866666666666666,
+      "pass_rate_pooled": 0.7822222222222223
+    },
+    "P4": {
+      "n_questions": 150,
+      "pass_rate_majority": 0.6933333333333334,
+      "pass_rate_pooled": 0.6822222222222222
+    },
+    "P5": {
+      "n_questions": 150,
+      "pass_rate_majority": 0.74,
+      "pass_rate_pooled": 0.7466666666666667
+    }
+  },
+  "highlight_pairs": {
+    "P1_vs_B0": {
+      "n_questions": 150,
+      "delta_pp_majority": 21.3,
+      "mcnemar_p": 1.0580771204088795e-07,
+      "discordant_b_gain": 1,
+      "discordant_a_gain": 33,
+      "n00": 35,
+      "n11": 81,
+      "wilcoxon_p_two_sided": 1.137573973697693e-08,
+      "delta_pp_mean_frac": -20.7,
+      "statistic": 15.0,
+      "cohen_h_majority": 0.45,
+      "sig_bonferroni": true
+    },
+    "P2_vs_B0": {
+      "n_questions": 150,
+      "delta_pp_majority": 20.7,
+      "mcnemar_p": 8.140458015277855e-07,
+      "discordant_b_gain": 3,
+      "discordant_a_gain": 34,
+      "n00": 34,
+      "n11": 79,
+      "wilcoxon_p_two_sided": 1.7026267639568233e-08,
+      "delta_pp_mean_frac": -20.9,
+      "statistic": 39.5,
+      "cohen_h_majority": 0.44,
+      "sig_bonferroni": true
+    },
+    "P3_vs_B0": {
+      "n_questions": 150,
+      "delta_pp_majority": 24.0,
+      "mcnemar_p": 5.433087474176234e-09,
+      "discordant_b_gain": 0,
+      "discordant_a_gain": 36,
+      "n00": 32,
+      "n11": 82,
+      "wilcoxon_p_two_sided": 2.5595300263814456e-09,
+      "delta_pp_mean_frac": -22.9,
+      "statistic": 12.0,
+      "cohen_h_majority": 0.52,
+      "sig_bonferroni": true
+    },
+    "P5_vs_B0": {
+      "n_questions": 150,
+      "delta_pp_majority": 19.3,
+      "mcnemar_p": 4.931769268078334e-07,
+      "discordant_b_gain": 1,
+      "discordant_a_gain": 30,
+      "n00": 38,
+      "n11": 81,
+      "wilcoxon_p_two_sided": 2.083622424068427e-08,
+      "delta_pp_mean_frac": -19.3,
+      "statistic": 28.0,
+      "cohen_h_majority": 0.41,
+      "sig_bonferroni": true
+    },
+    "P4_vs_B0": {
+      "n_questions": 150,
+      "delta_pp_majority": 14.7,
+      "mcnemar_p": 7.228793882618061e-05,
+      "discordant_b_gain": 3,
+      "discordant_a_gain": 25,
+      "n00": 43,
+      "n11": 79,
+      "wilcoxon_p_two_sided": 5.73044088413455e-06,
+      "delta_pp_mean_frac": -12.9,
+      "statistic": 67.0,
+      "cohen_h_majority": 0.3,
+      "sig_bonferroni": true
+    },
+    "B1_vs_B0": {
+      "n_questions": 150,
+      "delta_pp_majority": 6.0,
+      "mcnemar_p": 0.026500280602491884,
+      "discordant_b_gain": 2,
+      "discordant_a_gain": 11,
+      "n00": 57,
+      "n11": 80,
+      "wilcoxon_p_two_sided": 0.003081365986327229,
+      "delta_pp_mean_frac": -5.8,
+      "statistic": 74.5,
+      "cohen_h_majority": 0.12,
+      "sig_bonferroni": false
+    },
+    "P3_vs_P1": {
+      "n_questions": 150,
+      "delta_pp_majority": 2.7,
+      "mcnemar_p": 0.13361440253771584,
+      "discordant_b_gain": 0,
+      "discordant_a_gain": 4,
+      "n00": 32,
+      "n11": 114,
+      "wilcoxon_p_two_sided": 0.08418115742117628,
+      "delta_pp_mean_frac": -2.2,
+      "statistic": 8.0,
+      "cohen_h_majority": 0.06,
+      "sig_bonferroni": false
+    },
+    "P3_vs_P2": {
+      "n_questions": 150,
+      "delta_pp_majority": 3.3,
+      "mcnemar_p": 0.1305700181157369,
+      "discordant_b_gain": 1,
+      "discordant_a_gain": 6,
+      "n00": 31,
+      "n11": 112,
+      "wilcoxon_p_two_sided": 0.20234091630504325,
+      "delta_pp_mean_frac": -2.0,
+      "statistic": 23.0,
+      "cohen_h_majority": 0.08,
+      "sig_bonferroni": false
+    },
+    "P3_vs_P5": {
+      "n_questions": 150,
+      "delta_pp_majority": 4.7,
+      "mcnemar_p": 0.02334220201289086,
+      "discordant_b_gain": 0,
+      "discordant_a_gain": 7,
+      "n00": 32,
+      "n11": 111,
+      "wilcoxon_p_two_sided": 0.01440728953676283,
+      "delta_pp_mean_frac": -3.6,
+      "statistic": 8.0,
+      "cohen_h_majority": 0.11,
+      "sig_bonferroni": false
+    },
+    "P5_vs_P1": {
+      "n_questions": 150,
+      "delta_pp_majority": -2.0,
+      "mcnemar_p": 0.37109336952269756,
+      "discordant_b_gain": 4,
+      "discordant_a_gain": 1,
+      "n00": 35,
+      "n11": 110,
+      "wilcoxon_p_two_sided": 0.2754594092790089,
+      "delta_pp_mean_frac": 1.3,
+      "statistic": 30.0,
+      "cohen_h_majority": -0.05,
+      "sig_bonferroni": false
+    },
+    "P5_vs_P2": {
+      "n_questions": 150,
+      "delta_pp_majority": -1.3,
+      "mcnemar_p": 0.7236736098317629,
+      "discordant_b_gain": 5,
+      "discordant_a_gain": 3,
+      "n00": 34,
+      "n11": 108,
+      "wilcoxon_p_two_sided": 0.25745243592122957,
+      "delta_pp_mean_frac": 1.6,
+      "statistic": 29.5,
+      "cohen_h_majority": -0.03,
+      "sig_bonferroni": false
+    },
+    "P4_vs_P3": {
+      "n_questions": 150,
+      "delta_pp_majority": -9.3,
+      "mcnemar_p": 0.0005120045221899044,
+      "discordant_b_gain": 14,
+      "discordant_a_gain": 0,
+      "n00": 32,
+      "n11": 104,
+      "wilcoxon_p_two_sided": 2.383813106589934e-05,
+      "delta_pp_mean_frac": 10.0,
+      "statistic": 7.0,
+      "cohen_h_majority": -0.21,
+      "sig_bonferroni": true
+    },
+    "P4_vs_P1": {
+      "n_questions": 150,
+      "delta_pp_majority": -6.7,
+      "mcnemar_p": 0.004426525857919834,
+      "discordant_b_gain": 10,
+      "discordant_a_gain": 0,
+      "n00": 36,
+      "n11": 104,
+      "wilcoxon_p_two_sided": 4.460341310422151e-05,
+      "delta_pp_mean_frac": 7.8,
+      "statistic": 2.0,
+      "cohen_h_majority": -0.15,
+      "sig_bonferroni": false
+    }
+  }
+}
