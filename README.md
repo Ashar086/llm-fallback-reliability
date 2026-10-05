@@ -1,5 +1,6 @@
 # Reliability & Fallback Design Patterns for Multi-Agent LLM Systems
 
+<<<<<<< HEAD
 Code, data, and paper sources for a controlled comparison of fallback strategies
 in a multi-agent LLM pipeline. When a Planner → Retriever → Synthesizer →
 Formatter graph fails mid-run, what should you do? Stop, blind-retry, tool-check
@@ -18,6 +19,36 @@ latency.
 workshop LaTeX (Overleaf-ready): [`overleaf_neurips/`](overleaf_neurips/).
 Prebuilt PDFs: [`paper_submission.pdf`](paper_submission.pdf) (named) and
 [`paper_submission_anonymized.pdf`](paper_submission_anonymized.pdf) (blind).
+=======
+Code and data for a controlled comparison of fallback strategies in a
+multi-agent LLM pipeline. When a Planner → Retriever → Synthesizer → Formatter
+graph fails mid-run, what should you do? Stop, blind-retry, tool-check and
+retry, roll back to a checkpoint, degrade, or call a second verifier agent?
+
+**Headline finding.** Tool-grounded retry (P1), deterministic checkpointing
+(P2), and graceful degradation (P3) significantly beat a no-fallback baseline
+on pass rate at modest extra cost. Blind retry (B1) and a cross-agent
+verification gate (P4) did not, even though they cost more and stretch p95
+latency. Full write-up: [`full_draft.md`](full_draft.md).
+
+This repository contains the code, data, and experimental framework accompanying the paper:
+
+> **Reliability & Fallback Design Patterns for Multi-Agent LLM Systems**
+
+**Status:** Submitted to the **NeurIPS 2026 Workshop "Who Verifies the Agents?"** (under review).
+
+The repository is provided for transparency, reproducibility, and community feedback.
+
+---
+
+## System Architecture
+
+<p align="center">
+  <img src="figures/Agent%20Orchestrator%20Fallback-2026-09-03-160610.png" alt="Reliability & Fallback Design Patterns Architecture" width="100%">
+</p>
+
+*Figure 1: Controlled comparison between standard blind retry cascading (Panel A) and the state-isolated deterministic fallback architecture (Panel B). Panel A illustrates the blind retry trap where failed turns and error tracebacks pollute the context window, driving compounding downstream failures. Panel B enforces deterministic schema checks via pre-commit gatekeepers, combined with atomic state rollbacks to isolate and purge contaminated execution turns.*
+>>>>>>> 22cd1b8a3c4e0f8b70cb27c2efe1b59a3c4470b6
 
 ---
 
@@ -130,6 +161,7 @@ See [`overleaf_neurips/README.md`](overleaf_neurips/README.md).
 ## Repo structure
 
 ```
+<<<<<<< HEAD
 run_pipeline.py                 # CLI entrypoint
 config.py                       # model names, pricing, retry knobs
 pipeline/                       # graph, nodes, scoring, logging, strategies/
@@ -146,12 +178,27 @@ framework_design.md             # pattern specs
 lit_scan.md                     # related-work source list
 CITATION.cff                    # citation metadata
 logs/                           # local run outputs (gitignored)
+=======
+run_pipeline.py          # CLI entrypoint
+config.py                # model names, pricing, retry knobs
+pipeline/                # graph, nodes, scoring, logging, strategies/
+  strategies/            # B1, P1-P4 wrappers / orchestrators
+data/                    # questions + corpus + meta
+scripts/                 # subset builder, significance, figures
+figures/                 # fig1-fig3 PNGs
+full_draft.md            # paper draft
+significance_results.md  # pooled stats used in the paper
+framework_design.md      # pattern specs
+lit_scan.md              # related-work source list
+logs/                    # local run outputs (gitignored)
+>>>>>>> 22cd1b8a3c4e0f8b70cb27c2efe1b59a3c4470b6
 ```
 
 ---
 
-## How to cite
+## Citation
 
+<<<<<<< HEAD
 ```bibtex
 @misc{ishfaq2026fallback,
   title        = {Reliability \& Fallback Design Patterns for Multi-Agent LLM Systems},
@@ -168,6 +215,12 @@ Plain text:
 > Fallback Design Patterns for Multi-Agent LLM Systems*. Preprint; NeurIPS
 > workshop submission.
 
+=======
+If you use this repository, please cite:
+
+> Muhammad Ashar. (2026). *Reliability & Fallback Design Patterns for Multi-Agent LLM Systems*. Submitted to the **NeurIPS 2026 Workshop "Who Verifies the Agents?"** (under review).
+
+>>>>>>> 22cd1b8a3c4e0f8b70cb27c2efe1b59a3c4470b6
 See also [`CITATION.cff`](CITATION.cff).
 
 ---
@@ -181,5 +234,9 @@ MIT. See [`LICENSE`](LICENSE).
 ## Feedback
 
 Issues and PRs are welcome: bugs in the harness, clearer docs, replication on
+<<<<<<< HEAD
 other models or tasks, or comments on the draft in `full_draft.md` /
 `overleaf_neurips/main.tex`.
+=======
+other models or tasks, or comments on the draft in `full_draft.md`.
+>>>>>>> 22cd1b8a3c4e0f8b70cb27c2efe1b59a3c4470b6
