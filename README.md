@@ -5,7 +5,7 @@ fallback strategies in a multi-agent LLM pipeline
 (Planner → Retriever → Synthesizer → Formatter).
 
 **Authors.** Muhammad Ashar Ishfaq (The Islamia University of Bahawalpur),
-Muhammad Asad Ishfaq (Indiana University Bloomington).
+Muhammad Asad Ishfaq (The Islamia University of Bahawalpur).
 
 When a stage fails mid-run, systems may stop, blindly retry, apply tool-grounded
 checks, restore a checkpoint, degrade, or call a second verifier. This repository
@@ -43,7 +43,6 @@ pip install -r requirements.txt
 cp .env.example .env   # set ANTHROPIC_API_KEY
 ```
 
-Never commit `.env`.
 
 ---
 
