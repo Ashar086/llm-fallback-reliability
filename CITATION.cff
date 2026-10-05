@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this software or draft, please cite it as below."
+message: "If you use this software, please cite it as below."
 title: "Reliability & Fallback Design Patterns for Multi-Agent LLM Systems"
 type: software
 
@@ -16,9 +16,7 @@ abstract: >-
   tool-grounded retry, deterministic checkpointing, graceful degradation,
   cross-agent verification, and one tested P1+P2 composition) in a
   multi-agent multi-hop QA pipeline, measured on pass rate, latency, and
-  cost. Targeted patterns beat no-fallback when they address common
-  recoverable failure modes; blind retry does not after question-level
-  McNemar correction.
+  cost.
 
 keywords:
   - multi-agent systems
@@ -26,11 +24,10 @@ keywords:
   - reliability
   - fallback
   - LangGraph
-  - NeurIPS
 
 license: MIT
 version: "0.1.0"
-date-released: "2026-10-05"
+date-released: "2026-07-25"
 repository-code: "https://github.com/Ashar086/llm-fallback-reliability"
 url: "https://github.com/Ashar086/llm-fallback-reliability"
 
@@ -45,4 +42,3 @@ preferred-citation:
       given-names: Muhammad Asad
       affiliation: "Indiana University Bloomington"
   year: 2026
-  notes: 'Accepted to NeurIPS 2026 Workshop "Who Verifies the Agents?" (VerifyAgents)'
