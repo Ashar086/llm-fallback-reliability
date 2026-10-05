@@ -6,59 +6,43 @@ type: software
 authors:
   - family-names: Ishfaq
     given-names: Muhammad Ashar
-<<<<<<< HEAD
     affiliation: "The Islamia University of Bahawalpur"
   - family-names: Ishfaq
     given-names: Muhammad Asad
-    affiliation: "The Islamia University of Bahawalpur"
-=======
+    affiliation: "Indiana University Bloomington"
 
->>>>>>> 22cd1b8a3c4e0f8b70cb27c2efe1b59a3c4470b6
 abstract: >-
   Controlled comparison of fallback strategies (no fallback, blind retry,
   tool-grounded retry, deterministic checkpointing, graceful degradation,
-  cross-agent verification) in a multi-agent multi-hop QA pipeline, measured
-<<<<<<< HEAD
-  on pass rate, latency, and cost. Targeted patterns (P1-P3) significantly
-  beat no-fallback on pass rate; blind retry and cross-agent verification do not.
-=======
-  on pass rate, latency, and cost.
+  cross-agent verification, and one tested P1+P2 composition) in a
+  multi-agent multi-hop QA pipeline, measured on pass rate, latency, and
+  cost. Targeted patterns beat no-fallback when they address common
+  recoverable failure modes; blind retry does not after question-level
+  McNemar correction.
 
->>>>>>> 22cd1b8a3c4e0f8b70cb27c2efe1b59a3c4470b6
 keywords:
   - multi-agent systems
   - large language models
   - reliability
   - fallback
   - LangGraph
-<<<<<<< HEAD
   - NeurIPS
+
 license: MIT
 version: "0.1.0"
-date-released: "2026-07-25"
+date-released: "2026-10-05"
 repository-code: "https://github.com/Ashar086/llm-fallback-reliability"
 url: "https://github.com/Ashar086/llm-fallback-reliability"
-=======
 
-license: MIT
-version: "0.1.0"
-date-released: "2026-07-22"
-
->>>>>>> 22cd1b8a3c4e0f8b70cb27c2efe1b59a3c4470b6
 preferred-citation:
   type: article
   title: "Reliability & Fallback Design Patterns for Multi-Agent LLM Systems"
   authors:
     - family-names: Ishfaq
       given-names: Muhammad Ashar
-<<<<<<< HEAD
       affiliation: "The Islamia University of Bahawalpur"
     - family-names: Ishfaq
       given-names: Muhammad Asad
-      affiliation: "The Islamia University of Bahawalpur"
+      affiliation: "Indiana University Bloomington"
   year: 2026
-  notes: "Preprint; NeurIPS workshop submission"
-=======
-  year: 2026
-  notes: 'Submitted to NeurIPS 2026 Workshop "Who Verifies the Agents?" (under review)'
->>>>>>> 22cd1b8a3c4e0f8b70cb27c2efe1b59a3c4470b6
+  notes: 'Accepted to NeurIPS 2026 Workshop "Who Verifies the Agents?" (VerifyAgents)'
