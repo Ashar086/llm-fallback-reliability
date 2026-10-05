@@ -28,8 +28,8 @@ per condition are used only for descriptive rates, Wilson CIs, latency, and cost
 | **P3** | Graceful degradation | Targeted | Fall back to lightweight fast-path (Claude Haiku) |
 | **P4** | Cross-agent verification | Targeted | Secondary verifier agent critique |
 | **P5** | Composed P1+P2 | Tested composition | Checkpointing + tool-grounded recovery |
-Primary LLM stages use Claude Sonnet (`claude-sonnet-4-6`) at temperature 0.
-Haiku is used only on P3's rare cheap path.
+
+> **Note:** Primary LLM stages use Claude Sonnet (`claude-sonnet-4-6`) at temperature 0. Haiku is used only on P3's rare cheap path.
 
 ---
 
