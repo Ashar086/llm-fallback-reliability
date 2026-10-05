@@ -25,18 +25,19 @@ Thumbs.db
 .vscode/
 *.swp
 
-# Local scratch (keep out of public clones)
-*.xlsx
-*_raw.json
-
-# PDF / LaTeX build leftovers
+# PDF / LaTeX / workshop paper sources (keep local; not part of the code release)
 _pdf_build/
-figures/_pdf_preview/
-figures/_qa*.png
+_texbin/
+overleaf_neurips/
+overleaf_neurips_scaled.zip
 overleaf_neurips_upload.zip
+paper.pdf
+paper_submission.pdf
+paper_submission_anonymized.pdf
 paper_submission_named_latest.pdf
 paper_submission_*_FIXED.pdf
 paper_submission_new.pdf
+full_draft.md
 *.aux
 *.bbl
 *.blg
@@ -46,3 +47,13 @@ paper_submission_new.pdf
 *.out
 *.synctex.gz
 *.toc
+
+# Local scratch
+_brief_images/
+_page_audit.txt
+_static_ad_brief.txt
+_tmp_*
+figures/_pdf_preview/
+figures/_qa*.png
+*.xlsx
+*_raw.json
