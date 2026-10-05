@@ -17,19 +17,17 @@ three trials) with McNemar's test and Bonferroni correction. Pooled **450 runs**
 per condition are used only for descriptive rates, Wilson CIs, latency, and cost.
 
 ---
+### Conditions
 
-## Conditions
-
-| ID | Name | Role |
-|----|------|------|
-| B0 | No fallback | Baseline |
-| B1 | Blind retry | Baseline |
-| P1 | Tool-grounded retry | Targeted |
-| P2 | Deterministic checkpointing | Targeted |
-| P3 | Graceful degradation | Targeted |
-| P4 | Cross-agent verification | Targeted |
-| P5 | Composed P1+P2 | Tested composition |
-
+| ID | Name | Role | Strategy Description |
+| :--- | :--- | :--- | :--- |
+| **B0** | No fallback | Baseline | Immediate halt on failure |
+| **B1** | Blind retry | Baseline | Naive retry with identical prompt/context |
+| **P1** | Tool-grounded retry | Targeted | Inspect tool error output before re-attempting |
+| **P2** | Deterministic checkpointing | Targeted | Roll back to last verified stage state |
+| **P3** | Graceful degradation | Targeted | Fall back to lightweight fast-path (Claude Haiku) |
+| **P4** | Cross-agent verification | Targeted | Secondary verifier agent critique |
+| **P5** | Composed P1+P2 | Tested composition | Checkpointing + tool-grounded recovery |
 Primary LLM stages use Claude Sonnet (`claude-sonnet-4-6`) at temperature 0.
 Haiku is used only on P3's rare cheap path.
 
