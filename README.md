@@ -1,43 +1,26 @@
 # Reliability & Fallback Design Patterns for Multi-Agent LLM Systems
 
-<<<<<<< HEAD
 Code, data, and paper sources for a controlled comparison of fallback strategies
 in a multi-agent LLM pipeline. When a Planner → Retriever → Synthesizer →
 Formatter graph fails mid-run, what should you do? Stop, blind-retry, tool-check
 and retry, roll back to a checkpoint, degrade, or call a second verifier agent?
 
-**Authors.** Muhammad Ashar Ishfaq and Muhammad Asad Ishfaq (The Islamia
-University of Bahawalpur).
+**Authors.** Muhammad Ashar Ishfaq (The Islamia University of Bahawalpur) and
+Muhammad Asad Ishfaq (Indiana University Bloomington).
 
-**Headline finding.** Tool-grounded retry (P1), deterministic checkpointing
-(P2), and graceful degradation (P3) significantly beat a no-fallback baseline
-on pass rate at modest extra cost. Blind retry (B1) and a cross-agent
-verification gate (P4) did not, even though they cost more and stretch p95
-latency.
+**Status:** Accepted to the **NeurIPS 2026 Workshop "Who Verifies the Agents?"**
+(VerifyAgents), camera-ready.
 
-**Paper.** Markdown draft: [`full_draft.md`](full_draft.md). NeurIPS 2026
-workshop LaTeX (Overleaf-ready): [`overleaf_neurips/`](overleaf_neurips/).
-Prebuilt PDFs: [`paper_submission.pdf`](paper_submission.pdf) (named) and
-[`paper_submission_anonymized.pdf`](paper_submission_anonymized.pdf) (blind).
-=======
-Code and data for a controlled comparison of fallback strategies in a
-multi-agent LLM pipeline. When a Planner → Retriever → Synthesizer → Formatter
-graph fails mid-run, what should you do? Stop, blind-retry, tool-check and
-retry, roll back to a checkpoint, degrade, or call a second verifier agent?
+**Headline finding.** Targeted fallbacks (P1–P3, P5) significantly beat
+no-fallback under question-level McNemar tests when they address common
+recoverable failure modes (especially schema/JSON breakage on Claude Sonnet).
+Blind retry (B1) does not after Bonferroni correction. A cross-agent verifier
+(P4) beats B0 but is worse than P3 on cost and accuracy. Gains are
+failure-mode-dependent (GPT-4o-mini probe shows little lift when structural
+failures are rare).
 
-**Headline finding.** Tool-grounded retry (P1), deterministic checkpointing
-(P2), and graceful degradation (P3) significantly beat a no-fallback baseline
-on pass rate at modest extra cost. Blind retry (B1) and a cross-agent
-verification gate (P4) did not, even though they cost more and stretch p95
-latency. Full write-up: [`full_draft.md`](full_draft.md).
-
-This repository contains the code, data, and experimental framework accompanying the paper:
-
-> **Reliability & Fallback Design Patterns for Multi-Agent LLM Systems**
-
-**Status:** Submitted to the **NeurIPS 2026 Workshop "Who Verifies the Agents?"** (under review).
-
-The repository is provided for transparency, reproducibility, and community feedback.
+**Paper.** Camera-ready LaTeX: [`overleaf_neurips/`](overleaf_neurips/).
+Prebuilt PDF: [`paper_submission.pdf`](paper_submission.pdf).
 
 ---
 
@@ -47,12 +30,12 @@ The repository is provided for transparency, reproducibility, and community feed
   <img src="figures/Agent%20Orchestrator%20Fallback-2026-09-03-160610.png" alt="Reliability & Fallback Design Patterns Architecture" width="100%">
 </p>
 
-*Figure 1: Controlled comparison between standard blind retry cascading (Panel A) and the state-isolated deterministic fallback architecture (Panel B). Panel A illustrates the blind retry trap where failed turns and error tracebacks pollute the context window, driving compounding downstream failures. Panel B enforces deterministic schema checks via pre-commit gatekeepers, combined with atomic state rollbacks to isolate and purge contaminated execution turns.*
->>>>>>> 22cd1b8a3c4e0f8b70cb27c2efe1b59a3c4470b6
+*Figure: Controlled comparison between standard blind retry cascading (Panel A)
+and state-isolated deterministic fallback architecture (Panel B).*
 
 ---
 
-## Six conditions
+## Conditions
 
 | ID | Name | What it does |
 |----|------|----------------|
@@ -62,6 +45,7 @@ The repository is provided for transparency, reproducibility, and community feed
 | **P2** | Deterministic checkpointing | Save trusted state; on failure, roll back and re-run forward |
 | **P3** | Graceful degradation | After retries or budget fail, skip planning, optionally switch to Haiku, or return a low-confidence partial |
 | **P4** | Cross-agent verification | Verifier agent gates Synthesizer → Formatter; on reject, at most one re-synth |
+| **P5** | Composed P1+P2 | Tool-grounded retry first; on continued failure, checkpoint rollback |
 
 All primary LLM stages use Claude Sonnet (`claude-sonnet-4-6`) at temperature 0.
 Haiku shows up only on P3’s rare cheap path.
@@ -90,7 +74,7 @@ python run_pipeline.py --condition P1 --trial 1
 python run_pipeline.py --condition P4 --trial 2 --resume
 ```
 
-- `--condition`: one of `B0`, `B1`, `P1`, `P2`, `P3`, `P4`
+- `--condition`: one of `B0`, `B1`, `P1`, `P2`, `P3`, `P4`, `P5`
 - `--trial N`: write logs under `logs/{condition}/trial_N/`
 - `--resume`: skip questions that already have a log in that folder
 - `--mock`: offline stub LLM (no API calls; plumbing checks only)
@@ -103,56 +87,47 @@ python -m pipeline.aggregate P1 --trial 1
 
 ---
 
-## Reproduce tables and figures
+## Reproduce tables and figures (camera-ready)
 
-Published numbers are in [`significance_results.md`](significance_results.md)
-(ground truth for the paper). Figures:
+**Inferential (canonical):** 150 paired HotpotQA questions → majority pass
+across 3 trials → McNemar → Bonferroni (`α = 0.05/21`).
+
+**Descriptive:** 450 logged runs per condition → pooled pass rate + Wilson CI,
+latency, cost.
 
 ```bash
-# Needs logs under logs/{B0..P4}/trial_{1,2[,3]}/ as in the paper runs
-python scripts/significance_analysis.py   # regenerates significance_results.md
-python scripts/make_figures.py            # writes figures/fig1_*.png ... fig3_*.png
-python scripts/compare_conditions.py      # quick side-by-side table (optional)
+python run_stats.py                      # writes results_scaled/stats/
+python scripts/paired_question_stats.py  # McNemar JSON
+python scripts/make_figures_scaled.py    # figures_scaled/ + overleaf figures
+python scripts/audit_mcnemar_tex.py      # cross-check paper vs stats
 ```
 
-`make_figures.py` embeds the pooled numbers from `significance_results.md`.
-It does not re-score logs. Re-running the full six-condition trial matrix
-costs on the order of a few USD of Anthropic API usage (see the paper and
-past trial totals).
+Canonical summary: [`results_scaled/stats/statistical_summary.md`](results_scaled/stats/statistical_summary.md).  
+Highlight table: [`results_scaled/stats/paired_question_highlight.csv`](results_scaled/stats/paired_question_highlight.csv).
+
+Legacy pooled two-proportion z-tests are still emitted under
+`results_scaled/stats/pairwise_pvalues*.csv` for diagnostics only — **do not
+quote them as camera-ready significance.**
 
 ---
 
 ## Dataset
 
-HotpotQA distractor validation subset, **included** under `data/`:
-
-- `data/questions.json`: 40 multi-hop questions
-- `data/corpus/`: 100 docs (80 supporting + 20 distractors)
-- `data/dataset_meta.json`: filters and IDs
-
-Selection filters (also in meta / `scripts/build_hotpot_subset.py`): short gold
-answers (at most 60 chars / 6 tokens), no yes/no, at least 2 supporting titles,
-bridge-type preferred, deterministic sort-then-take-40. To rebuild from
-Hugging Face:
-
-```bash
-pip install datasets
-python scripts/build_hotpot_subset.py
-```
+HotpotQA distractor validation subset under `data/` (scaled experiment: 150
+questions; see `data/questions.json` and `data/dataset_meta.json`).
 
 ---
 
 ## Paper (NeurIPS / Overleaf)
 
-Upload the [`overleaf_neurips/`](overleaf_neurips/) folder to Overleaf (or zip
-its contents). Main file: `overleaf_neurips/main.tex`. It uses the official
-NeurIPS 2026 style (`neurips_2026.sty`) in double-blind workshop mode.
+Upload [`overleaf_neurips/`](overleaf_neurips/) to Overleaf. Main file:
+`overleaf_neurips/main.tex`.
 
-1. Overleaf → New Project → Upload Project (zip the folder contents)
-2. Set main document to `main.tex`
-3. Edit `\workshoptitle{...}` to your workshop name
-4. Blind review: `\usepackage[dblblindworkshop]{neurips_2026}`
-5. Camera-ready: `\usepackage[dblblindworkshop, final]{neurips_2026}`
+Camera-ready package option:
+
+```latex
+\usepackage[dblblindworkshop, final]{neurips_2026}
+```
 
 See [`overleaf_neurips/README.md`](overleaf_neurips/README.md).
 
@@ -161,66 +136,35 @@ See [`overleaf_neurips/README.md`](overleaf_neurips/README.md).
 ## Repo structure
 
 ```
-<<<<<<< HEAD
 run_pipeline.py                 # CLI entrypoint
+run_stats.py                    # McNemar-canonical + descriptive stats
 config.py                       # model names, pricing, retry knobs
 pipeline/                       # graph, nodes, scoring, logging, strategies/
-  strategies/                   # B1, P1-P4 wrappers / orchestrators
+scripts/                        # paired stats, figures, ablations, probes
+results_scaled/stats/           # camera-ready statistical outputs
 data/                           # questions + corpus + meta
-scripts/                        # subset builder, significance, figures
-figures/                        # fig1-fig3 PNGs
-full_draft.md                   # markdown paper draft
-overleaf_neurips/               # NeurIPS 2026 LaTeX (Overleaf)
+figures/                        # architecture diagram + older figs
+figures_scaled/                 # regenerated result figures
+overleaf_neurips/               # NeurIPS 2026 LaTeX (camera-ready)
 paper_submission.pdf            # named PDF
-paper_submission_anonymized.pdf # blind PDF
-significance_results.md         # pooled stats used in the paper
-framework_design.md             # pattern specs
-lit_scan.md                     # related-work source list
 CITATION.cff                    # citation metadata
 logs/                           # local run outputs (gitignored)
-=======
-run_pipeline.py          # CLI entrypoint
-config.py                # model names, pricing, retry knobs
-pipeline/                # graph, nodes, scoring, logging, strategies/
-  strategies/            # B1, P1-P4 wrappers / orchestrators
-data/                    # questions + corpus + meta
-scripts/                 # subset builder, significance, figures
-figures/                 # fig1-fig3 PNGs
-full_draft.md            # paper draft
-significance_results.md  # pooled stats used in the paper
-framework_design.md      # pattern specs
-lit_scan.md              # related-work source list
-logs/                    # local run outputs (gitignored)
->>>>>>> 22cd1b8a3c4e0f8b70cb27c2efe1b59a3c4470b6
 ```
 
 ---
 
 ## Citation
 
-<<<<<<< HEAD
 ```bibtex
 @misc{ishfaq2026fallback,
   title        = {Reliability \& Fallback Design Patterns for Multi-Agent LLM Systems},
   author       = {Ishfaq, Muhammad Ashar and Ishfaq, Muhammad Asad},
   year         = {2026},
-  note         = {Preprint; NeurIPS workshop submission},
+  note         = {Accepted to NeurIPS 2026 Workshop Who Verifies the Agents?},
   howpublished = {\url{https://github.com/Ashar086/llm-fallback-reliability}}
 }
 ```
 
-Plain text:
-
-> Muhammad Ashar Ishfaq and Muhammad Asad Ishfaq. (2026). *Reliability &
-> Fallback Design Patterns for Multi-Agent LLM Systems*. Preprint; NeurIPS
-> workshop submission.
-
-=======
-If you use this repository, please cite:
-
-> Muhammad Ashar. (2026). *Reliability & Fallback Design Patterns for Multi-Agent LLM Systems*. Submitted to the **NeurIPS 2026 Workshop "Who Verifies the Agents?"** (under review).
-
->>>>>>> 22cd1b8a3c4e0f8b70cb27c2efe1b59a3c4470b6
 See also [`CITATION.cff`](CITATION.cff).
 
 ---
@@ -234,9 +178,4 @@ MIT. See [`LICENSE`](LICENSE).
 ## Feedback
 
 Issues and PRs are welcome: bugs in the harness, clearer docs, replication on
-<<<<<<< HEAD
-other models or tasks, or comments on the draft in `full_draft.md` /
-`overleaf_neurips/main.tex`.
-=======
-other models or tasks, or comments on the draft in `full_draft.md`.
->>>>>>> 22cd1b8a3c4e0f8b70cb27c2efe1b59a3c4470b6
+other models or tasks, or comments on `overleaf_neurips/main.tex`.
