@@ -67,18 +67,39 @@ python -m pipeline.aggregate P1 --trial 1
 
 ## Reproducing statistics and figures
 
+**Main Hotpot experiment (150 questions × 3 trials).** The public release
+includes `results_scaled/question_outcomes.csv` so tables and McNemar tests can
+be rebuilt **without** re-running the pipeline or holding the original `logs/`.
+To regenerate that CSV from local run logs (not required if you use the
+committed outcomes file):
+
 ```bash
+python scripts/build_question_outcomes.py   # reads logs/{B0..P5}/trial_{1,2,3}/
+python scripts/build_experiment_summary.py
 python run_stats.py
 python scripts/paired_question_stats.py
 python scripts/make_figures_scaled.py
 python scripts/audit_mcnemar_tex.py
 ```
 
+**Appendix ablation (50 IDs × 2 trials).** With local logs for `P1R`, `P1C`,
+`P1S`:
+
+```bash
+python scripts/appendix_paired_stats.py
+```
+
+**2Wiki / GPT-4o-mini probes.** Add outcome CSVs under
+[`results_scaled/appendix_probes/`](results_scaled/appendix_probes/) (see README
+there), then rerun `appendix_paired_stats.py`.
+
 Canonical outputs:
 
 - [`results_scaled/stats/statistical_summary.md`](results_scaled/stats/statistical_summary.md)
 - [`results_scaled/stats/paired_question_highlight.csv`](results_scaled/stats/paired_question_highlight.csv)
+- [`results_scaled/stats/paired_question_all_pairs.csv`](results_scaled/stats/paired_question_all_pairs.csv) — full 21-pair McNemar matrix
 - [`results_scaled/stats/paired_question_tests.json`](results_scaled/stats/paired_question_tests.json)
+- [`results_scaled/stats/appendix/p1_ablation_paired.json`](results_scaled/stats/appendix/p1_ablation_paired.json)
 
 Legacy pooled z-tests under `results_scaled/stats/pairwise_pvalues*.csv` are
 diagnostic only and are not the primary inferential analysis.

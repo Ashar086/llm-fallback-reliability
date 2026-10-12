@@ -29,6 +29,7 @@ HIGHLIGHT = [
     ("P3", "P5"),
     ("P5", "P1"),
     ("P5", "P2"),
+    ("P5", "P3"),
     ("P4", "P3"),
     ("P4", "P1"),
 ]
@@ -135,8 +136,15 @@ def main() -> None:
         highlight[key] = entry
         pairs[key] = entry
 
+    all_pairs = {}
+    for a, b in combinations(CONDS, 2):
+        key = f"{a}_vs_{b}"
+        if key in pairs:
+            all_pairs[key] = pairs[key]
+
     payload = {
         "bonferroni_alpha": BONF,
+        "n_pairwise_comparisons": len(all_pairs),
         "definition": (
             "Per question: pass if majority of trials pass (>= ceil(n_trials/2)). "
             "McNemar test on paired majority outcomes across 150 questions; "
@@ -144,6 +152,7 @@ def main() -> None:
         ),
         "per_condition": per_cond_majority,
         "highlight_pairs": highlight,
+        "all_pairs": all_pairs,
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(payload, indent=2), encoding="utf-8")

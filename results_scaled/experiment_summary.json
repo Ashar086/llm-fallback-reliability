@@ -1,0 +1,54 @@
+{
+  "source": "question_outcomes.csv",
+  "conditions": [
+    {
+      "condition": "B0",
+      "pass_rate": 0.5533333333333333,
+      "n_runs": 450,
+      "n_passed": 249,
+      "avg_cost_per_question": 0.0052
+    },
+    {
+      "condition": "B1",
+      "pass_rate": 0.6111111111111112,
+      "n_runs": 450,
+      "n_passed": 275,
+      "avg_cost_per_question": 0.0085
+    },
+    {
+      "condition": "P1",
+      "pass_rate": 0.76,
+      "n_runs": 450,
+      "n_passed": 342,
+      "avg_cost_per_question": 0.0072
+    },
+    {
+      "condition": "P2",
+      "pass_rate": 0.7622222222222222,
+      "n_runs": 450,
+      "n_passed": 343,
+      "avg_cost_per_question": 0.0073
+    },
+    {
+      "condition": "P3",
+      "pass_rate": 0.7822222222222223,
+      "n_runs": 450,
+      "n_passed": 352,
+      "avg_cost_per_question": 0.0073
+    },
+    {
+      "condition": "P4",
+      "pass_rate": 0.6822222222222222,
+      "n_runs": 450,
+      "n_passed": 307,
+      "avg_cost_per_question": 0.0183
+    },
+    {
+      "condition": "P5",
+      "pass_rate": 0.7466666666666667,
+      "n_runs": 450,
+      "n_passed": 336,
+      "avg_cost_per_question": 0.0071
+    }
+  ]
+}

@@ -6,7 +6,7 @@ Camera-ready canonical analysis for the HotpotQA main experiment (matches `overl
 
 1. **Inferential (canonical):** 150 paired questions -> majority pass across 3 trials -> two-sided McNemar (continuity correction) -> Bonferroni over 21 pairs (alpha=0.002381). Primary p-values and Delta-pp in the paper use this layer.
 2. **Descriptive:** 450 logged runs per condition -> pooled pass rate, Wilson 95% CI, latency p50/p95, average $/question. These are *not* treated as independent observations for significance.
-3. **Appendix-only:** P1 ablation / 2Wiki / GPT-4o-mini probes use pooled two-proportion z-tests on their own smaller subsets (clearly labeled in the paper appendix). They are **not** the canonical HotpotQA significance path.
+3. **Appendix-only:** P1 ablation uses the same majority-pass McNemar protocol on a separate 50-question subset (see `stats/appendix/p1_ablation_paired.json`). 2Wiki / GPT-4o-mini probes report pooled descriptives until probe outcome CSVs are provided under `results_scaled/appendix_probes/`.
 
 Legacy pooled z-tests are still written to `pairwise_pvalues_tidy.csv` for diagnostics; **do not quote them as camera-ready significance.**
 
@@ -73,13 +73,13 @@ Pooled rates / Wilson CIs / cost below use all 450 runs. Use for tables and figu
 
 | Condition | Pass Rate | $/Q | Pass/$ | Cost/1000 successes | × vs P3 |
 |-----------|----------:|----:|-------:|--------------------:|--------:|
-| B0 | 55.3% | $0.0052 | 106.9 | $9.35 | 0.71× |
-| B1 | 61.1% | $0.0085 | 72.3 | $13.83 | 1.15× |
-| P1 | 76.0% | $0.0072 | 104.9 | $9.53 | 0.99× |
-| P2 | 76.2% | $0.0073 | 104.8 | $9.54 | 0.99× |
-| P3 | 78.2% | $0.0073 | 106.8 | $9.36 | 1.00× |
-| P4 | 68.2% | $0.0183 | 37.2 | $26.85 | 2.50× |
-| P5 | 74.7% | $0.0071 | 104.7 | $9.55 | 0.97× |
+| B0 | 55.3% | $0.0052 | 106.4 | $9.40 | 0.71× |
+| B1 | 61.1% | $0.0085 | 71.9 | $13.91 | 1.16× |
+| P1 | 76.0% | $0.0072 | 105.6 | $9.47 | 0.99× |
+| P2 | 76.2% | $0.0073 | 104.4 | $9.58 | 1.00× |
+| P3 | 78.2% | $0.0073 | 107.2 | $9.33 | 1.00× |
+| P4 | 68.2% | $0.0183 | 37.3 | $26.82 | 2.51× |
+| P5 | 74.7% | $0.0071 | 105.2 | $9.51 | 0.97× |
 
 ### Question stability (within 3 trials)
 

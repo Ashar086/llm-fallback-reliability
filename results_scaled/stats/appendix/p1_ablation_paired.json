@@ -1,0 +1,148 @@
+{
+  "experiment": "p1_check_ablation",
+  "n_questions": 50,
+  "trials_per_question": 2,
+  "note": "Separate 50-question Hotpot subset (not the main 150-question set). Pass if majority of 2 trials pass. McNemar on paired questions; Bonferroni alpha=0.05/8 for table comparisons.",
+  "wilson_pooled": [
+    {
+      "condition": "B0",
+      "n_runs": 100,
+      "n_pass": 62,
+      "pass_rate_pooled": 0.62,
+      "wilson_lo": 0.5220975529551107,
+      "wilson_hi": 0.7090240074752127,
+      "display": "B0",
+      "n_questions": 50
+    },
+    {
+      "condition": "P1",
+      "n_runs": 100,
+      "n_pass": 79,
+      "pass_rate_pooled": 0.79,
+      "wilson_lo": 0.7002003116591013,
+      "wilson_hi": 0.858343459380847,
+      "display": "P1-full",
+      "n_questions": 50
+    },
+    {
+      "condition": "P1R",
+      "n_runs": 100,
+      "n_pass": 61,
+      "pass_rate_pooled": 0.61,
+      "wilson_lo": 0.5120301704584073,
+      "wilson_hi": 0.6998312599360558,
+      "display": "P1R",
+      "n_questions": 50
+    },
+    {
+      "condition": "P1C",
+      "n_runs": 100,
+      "n_pass": 57,
+      "pass_rate_pooled": 0.57,
+      "wilson_lo": 0.47215389549212305,
+      "wilson_hi": 0.6626670147588988,
+      "display": "P1C",
+      "n_questions": 50
+    },
+    {
+      "condition": "P1S",
+      "n_runs": 100,
+      "n_pass": 74,
+      "pass_rate_pooled": 0.74,
+      "wilson_lo": 0.6462901055081282,
+      "wilson_hi": 0.8159530153525186,
+      "display": "P1S",
+      "n_questions": 50
+    }
+  ],
+  "comparisons": [
+    {
+      "comparison": "P1-full vs P1R",
+      "condition_a": "P1",
+      "condition_b": "P1R",
+      "n_questions": 50,
+      "delta_pp_majority": 16.0,
+      "mcnemar_p": 0.04330814281079206,
+      "mcnemar_p_bonferroni_alpha": 0.00625,
+      "significant_bonferroni": false,
+      "test": "McNemar (majority over 2 trials)"
+    },
+    {
+      "comparison": "P1-full vs P1C",
+      "condition_a": "P1",
+      "condition_b": "P1C",
+      "n_questions": 50,
+      "delta_pp_majority": 18.0,
+      "mcnemar_p": 0.026500280602491884,
+      "mcnemar_p_bonferroni_alpha": 0.00625,
+      "significant_bonferroni": false,
+      "test": "McNemar (majority over 2 trials)"
+    },
+    {
+      "comparison": "P1-full vs P1S",
+      "condition_a": "P1",
+      "condition_b": "P1S",
+      "n_questions": 50,
+      "delta_pp_majority": 4.0,
+      "mcnemar_p": 0.47950012218695337,
+      "mcnemar_p_bonferroni_alpha": 0.00625,
+      "significant_bonferroni": false,
+      "test": "McNemar (majority over 2 trials)"
+    },
+    {
+      "comparison": "B0 vs P1R",
+      "condition_a": "B0",
+      "condition_b": "P1R",
+      "n_questions": 50,
+      "delta_pp_majority": 4.0,
+      "mcnemar_p": 0.6830913983096086,
+      "mcnemar_p_bonferroni_alpha": 0.00625,
+      "significant_bonferroni": false,
+      "test": "McNemar (majority over 2 trials)"
+    },
+    {
+      "comparison": "B0 vs P1C",
+      "condition_a": "B0",
+      "condition_b": "P1C",
+      "n_questions": 50,
+      "delta_pp_majority": 6.0,
+      "mcnemar_p": 0.4496917979688908,
+      "mcnemar_p_bonferroni_alpha": 0.00625,
+      "significant_bonferroni": false,
+      "test": "McNemar (majority over 2 trials)"
+    },
+    {
+      "comparison": "B0 vs P1S",
+      "condition_a": "B0",
+      "condition_b": "P1S",
+      "n_questions": 50,
+      "delta_pp_majority": -8.0,
+      "mcnemar_p": 0.22067136191984324,
+      "mcnemar_p_bonferroni_alpha": 0.00625,
+      "significant_bonferroni": false,
+      "test": "McNemar (majority over 2 trials)"
+    },
+    {
+      "comparison": "B0 vs P1-full",
+      "condition_a": "B0",
+      "condition_b": "P1",
+      "n_questions": 50,
+      "delta_pp_majority": -12.0,
+      "mcnemar_p": 0.07709987174354202,
+      "mcnemar_p_bonferroni_alpha": 0.00625,
+      "significant_bonferroni": false,
+      "test": "McNemar (majority over 2 trials)"
+    },
+    {
+      "comparison": "P1-full vs B0",
+      "condition_a": "P1",
+      "condition_b": "B0",
+      "n_questions": 50,
+      "delta_pp_majority": 12.0,
+      "mcnemar_p": 0.07709987174354202,
+      "mcnemar_p_bonferroni_alpha": 0.00625,
+      "significant_bonferroni": false,
+      "test": "McNemar (majority over 2 trials)"
+    }
+  ]
+}

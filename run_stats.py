@@ -662,10 +662,11 @@ def step_report(
         "These are *not* treated as independent observations for significance."
     )
     lines.append(
-        "3. **Appendix-only:** P1 ablation / 2Wiki / GPT-4o-mini probes use "
-        "pooled two-proportion z-tests on their own smaller subsets "
-        "(clearly labeled in the paper appendix). They are **not** the "
-        "canonical HotpotQA significance path."
+        "3. **Appendix-only:** P1 ablation uses the same majority-pass McNemar "
+        "protocol on a separate 50-question subset (see "
+        "`stats/appendix/p1_ablation_paired.json`). 2Wiki / GPT-4o-mini "
+        "probes report pooled descriptives until probe outcome CSVs are "
+        "provided under `results_scaled/appendix_probes/`."
     )
     lines.append("")
     lines.append(
@@ -955,6 +956,28 @@ def step_paired_question(df: pd.DataFrame) -> dict:
     path = OUT_DIR / "paired_question_highlight.csv"
     out.to_csv(path, index=False)
     print(f"Saved {path}")
+
+    all_rows = []
+    for a, b in combinations(EXPECTED_CONDS, 2):
+        pa = majority_rates[a]
+        pb = majority_rates[b]
+        dpp = round(100.0 * (pa - pb), 1)
+        p = paired_p[(a, b)]
+        all_rows.append(
+            {
+                "condition_a": a,
+                "condition_b": b,
+                "pass_a_majority": pa,
+                "pass_b_majority": pb,
+                "delta_pp_majority": dpp,
+                "mcnemar_p": p,
+                "significant_bonferroni": p < BONFERRONI_ALPHA,
+            }
+        )
+    all_path = OUT_DIR / "paired_question_all_pairs.csv"
+    pd.DataFrame(all_rows).to_csv(all_path, index=False)
+    print(f"Saved {all_path} (all {N_PAIRS} pairs)")
+
     print("Step 3b complete.\n")
     return {
         "paired_p": paired_p,

@@ -1,0 +1,8 @@
+Condition,n_questions,pct_fully_reliable_3of3,pct_fully_unreliable_0of3,pct_unstable_mixed,consistency_score_agree_all_trials
+B0,150,50.0,38.7,11.3,0.8867
+B1,150,54.7,32.0,13.3,0.8667
+P1,150,74.0,22.0,4.0,0.96
+P2,150,74.0,20.7,5.3,0.9467
+P3,150,75.3,19.3,5.3,0.9467
+P4,150,62.7,27.3,10.0,0.9
+P5,150,72.0,22.0,6.0,0.94
