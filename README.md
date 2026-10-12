@@ -89,9 +89,11 @@ python scripts/audit_mcnemar_tex.py
 python scripts/appendix_paired_stats.py
 ```
 
-**2Wiki / GPT-4o-mini probes.** Add outcome CSVs under
-[`results_scaled/appendix_probes/`](results_scaled/appendix_probes/) (see README
-there), then rerun `appendix_paired_stats.py`.
+**2Wiki / GPT-4o-mini probes.** Outcome CSVs for these probes are **not** in
+the public release (see
+[`results_scaled/appendix_probes/README.md`](results_scaled/appendix_probes/README.md)).
+The paper reports descriptive pooled rates only. If you later obtain the CSVs,
+place them under that folder and rerun `appendix_paired_stats.py`.
 
 Canonical outputs:
 

@@ -19,7 +19,12 @@ def cohen_h(p1: float, p2: float) -> float:
 
 
 def question_majority_table(df: pd.DataFrame) -> dict[str, pd.DataFrame]:
-    """Group by condition -> per-question majority pass and trial fraction."""
+    """Group by condition -> per-question majority pass and trial fraction.
+
+    Majority rule: pass if n_pass >= ceil(n_trials / 2).
+    - 3 trials: >=2 of 3 (no ties).
+    - 2 trials: >=1 of 2, so a 1-1 split counts as pass (tie -> pass).
+    """
     out: dict[str, pd.DataFrame] = {}
     for cond, sub in df.groupby("condition"):
         g = sub.groupby("question_id")["pass"].agg(["sum", "count"])

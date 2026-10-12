@@ -84,19 +84,18 @@ def run_ablation(logs_dir: Path) -> dict:
     df = build_ablation_frame(logs_dir)
     n_q = df["question_id"].nunique()
     q = question_majority_table(df)
-    # Bonferroni over comparisons we report in the table (6 variants -> many pairs;
-    # table reports vs P1-full and vs B0 for each ablation variant)
+    # Seven unique unordered pairs shown in the paper table (P1 vs B0 counted once;
+    # self-cells are placeholders, not tests).
     comparisons = [
+        ("P1-full", "P1", "B0"),
         ("P1-full", "P1", "P1R"),
         ("P1-full", "P1", "P1C"),
         ("P1-full", "P1", "P1S"),
         ("B0", "B0", "P1R"),
         ("B0", "B0", "P1C"),
         ("B0", "B0", "P1S"),
-        ("B0", "B0", "P1"),
-        ("P1-full", "P1", "B0"),
     ]
-    n_tests = len(comparisons)
+    n_tests = len(comparisons)  # 7
     bonf = 0.05 / n_tests
 
     wilson_rows = []
@@ -119,7 +118,10 @@ def run_ablation(logs_dir: Path) -> dict:
                 "mcnemar_p": m["mcnemar_p"],
                 "mcnemar_p_bonferroni_alpha": bonf,
                 "significant_bonferroni": m["mcnemar_p"] < bonf,
-                "test": "McNemar (majority over 2 trials)",
+                "test": (
+                    "McNemar; pass if sum >= ceil(n_trials/2) "
+                    "(2 trials: >=1 of 2, so 1-1 ties count as pass)"
+                ),
             }
         )
 
@@ -127,10 +129,17 @@ def run_ablation(logs_dir: Path) -> dict:
         "experiment": "p1_check_ablation",
         "n_questions": n_q,
         "trials_per_question": 2,
+        "tie_rule": (
+            "pass if n_pass >= ceil(n_trials/2); with 2 trials a 1-1 split is a pass"
+        ),
+        "bonferroni_family": (
+            "7 unique pairs: P1 vs B0; {P1R,P1C,P1S} vs P1; {P1R,P1C,P1S} vs B0"
+        ),
         "note": (
             "Separate 50-question Hotpot subset (not the main 150-question set). "
-            "Pass if majority of 2 trials pass. McNemar on paired questions; "
-            f"Bonferroni alpha=0.05/{n_tests} for table comparisons."
+            "Pass if n_pass >= ceil(n_trials/2); with 2 trials a 1-1 split counts "
+            f"as pass. McNemar on 50 paired questions; Bonferroni alpha=0.05/{n_tests} "
+            f"(≈{bonf:.5f}) over the seven unique table comparisons."
         ),
         "wilson_pooled": wilson_rows,
         "comparisons": test_rows,
