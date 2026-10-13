@@ -1,4 +1,4 @@
-"""Build results_scaled/experiment_summary.json from question_outcomes.csv."""
+"""Build results/experiment_summary.json from question_outcomes.csv."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ from pathlib import Path
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
-CSV = ROOT / "results_scaled" / "question_outcomes.csv"
+CSV = ROOT / "results" / "question_outcomes.csv"
 FALLBACK_COST = {
     "B0": 0.0052,
     "B1": 0.0085,
@@ -40,7 +40,7 @@ def main() -> None:
             }
         )
     out = {"source": str(CSV.name), "conditions": blocks}
-    path = ROOT / "results_scaled" / "experiment_summary.json"
+    path = ROOT / "results" / "experiment_summary.json"
     path.write_text(json.dumps(out, indent=2), encoding="utf-8")
     print(f"Wrote {path}")
 

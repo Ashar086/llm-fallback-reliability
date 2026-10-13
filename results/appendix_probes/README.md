@@ -8,10 +8,10 @@ from GitHub alone.
 If you obtain the original per-question logs, place CSVs here to regenerate
 paired McNemar tests:
 
-- `2wiki_outcomes.csv` — 50 2Wiki questions × 2 trials × {B0,B1,P1,P3}
-- `gpt4o_mini_outcomes.csv` — 50 Hotpot IDs × 2 trials × {B0,P1,P3}
+- `2wiki_outcomes.csv` â€” 50 2Wiki questions Ã— 2 trials Ã— {B0,B1,P1,P3}
+- `gpt4o_mini_outcomes.csv` â€” 50 Hotpot IDs Ã— 2 trials Ã— {B0,P1,P3}
 
-Schema (same as `results_scaled/question_outcomes.csv`):
+Schema (same as `results/question_outcomes.csv`):
 
 | column | type |
 |--------|------|
@@ -26,8 +26,8 @@ Then run:
 python scripts/appendix_paired_stats.py
 ```
 
-Outputs land in `results_scaled/stats/appendix/`.
+Outputs land in `results/stats/appendix/`.
 
 **What is reproducible from this release without these CSVs:** the main
-150×3 Hotpot experiment (`question_outcomes.csv`) and the P1 check ablation
+150Ã—3 Hotpot experiment (`question_outcomes.csv`) and the P1 check ablation
 (`stats/appendix/p1_ablation_outcomes.csv`).

@@ -59,7 +59,7 @@ def main() -> None:
     p.add_argument(
         "--output",
         type=Path,
-        default=ROOT / "results_scaled" / "question_outcomes.csv",
+        default=ROOT / "results" / "question_outcomes.csv",
     )
     p.add_argument("--logs-dir", type=Path, default=config.LOGS_DIR)
     args = p.parse_args()

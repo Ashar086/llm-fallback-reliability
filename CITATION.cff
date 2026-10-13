@@ -16,7 +16,8 @@ abstract: >-
   tool-grounded retry, deterministic checkpointing, graceful degradation,
   cross-agent verification, and one tested P1+P2 composition) in a
   multi-agent multi-hop QA pipeline, measured on pass rate, latency, and
-  cost.
+  cost. Primary tests: 150 paired HotpotQA questions, McNemar with
+  Bonferroni over 21 pairs; 450 pooled runs per condition for descriptives.
 
 keywords:
   - multi-agent systems
@@ -26,10 +27,13 @@ keywords:
   - LangGraph
 
 license: MIT
-version: "0.1.0"
-date-released: "2026-07-25"
+version: "1.0.0-camera-ready"
+date-released: "2026-10-12"
 repository-code: "https://github.com/Ashar086/llm-fallback-reliability"
 url: "https://github.com/Ashar086/llm-fallback-reliability"
+# After Zenodo / OpenReview are public, set:
+# doi: "10.5281/zenodo.XXXXXXXX"
+# and update url to the paper page.
 
 preferred-citation:
   type: article
@@ -42,3 +46,4 @@ preferred-citation:
       given-names: Muhammad Asad
       affiliation: "Indiana University Bloomington"
   year: 2026
+  notes: "NeurIPS 2026 Workshop: Who Verifies the Agents? Toward Reliable Agent Development"

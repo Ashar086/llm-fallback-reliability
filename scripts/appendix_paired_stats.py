@@ -27,7 +27,7 @@ from stats_core import (
     wilson_pooled,
 )
 
-OUT_DIR = ROOT / "results_scaled" / "stats" / "appendix"
+OUT_DIR = ROOT / "results" / "stats" / "appendix"
 ABLATION_TRIALS = [1, 2]
 ABLATION_VARIANTS = ["B0", "P1", "P1R", "P1C", "P1S"]
 # Display names in paper
@@ -139,7 +139,7 @@ def run_ablation(logs_dir: Path) -> dict:
             "Separate 50-question Hotpot subset (not the main 150-question set). "
             "Pass if n_pass >= ceil(n_trials/2); with 2 trials a 1-1 split counts "
             f"as pass. McNemar on 50 paired questions; Bonferroni alpha=0.05/{n_tests} "
-            f"(≈{bonf:.5f}) over the seven unique table comparisons."
+            f"(â‰ˆ{bonf:.5f}) over the seven unique table comparisons."
         ),
         "wilson_pooled": wilson_rows,
         "comparisons": test_rows,
@@ -205,7 +205,7 @@ def main() -> None:
     for t in abl["comparisons"]:
         sig = "sig" if t["significant_bonferroni"] else "ns"
         lines.append(
-            f"- {t['comparison']}: Δpp={t['delta_pp_majority']:+.1f}, "
+            f"- {t['comparison']}: Î”pp={t['delta_pp_majority']:+.1f}, "
             f"p={fmt_p(t['mcnemar_p'])} ({sig} Bonferroni)"
         )
 
@@ -214,7 +214,7 @@ def main() -> None:
     print(f"Wrote {out_json}")
     print(f"Wrote {md_path}")
 
-    probe_dir = ROOT / "results_scaled" / "appendix_probes"
+    probe_dir = ROOT / "results" / "appendix_probes"
     for label, fname, n_bonf in [
         ("2wiki", "2wiki_outcomes.csv", 6),
         ("gpt4o_mini", "gpt4o_mini_outcomes.csv", 3),

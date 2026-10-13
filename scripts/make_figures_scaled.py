@@ -1,11 +1,11 @@
 """Publication-ready scaled-experiment figures (300 DPI).
 
 Reads:
-  results_scaled/stats/wilson_ci.csv
-  results_scaled/stats/cost_efficiency.csv
-  results_scaled/stats/pairwise_pvalues_tidy.csv
-  results_scaled/stats/stage_failures.csv
-  results_scaled/experiment_summary.json
+  results/stats/wilson_ci.csv
+  results/stats/cost_efficiency.csv
+  results/stats/pairwise_pvalues_tidy.csv
+  results/stats/stage_failures.csv
+  results/experiment_summary.json
 
 Writes to figures_scaled/:
   fig1_pass_rate.png
@@ -27,15 +27,15 @@ import pandas as pd
 import seaborn as sns
 
 ROOT = Path(__file__).resolve().parents[1]
-STATS = ROOT / "results_scaled" / "stats"
-SUMMARY_PATH = ROOT / "results_scaled" / "experiment_summary.json"
+STATS = ROOT / "results" / "stats"
+SUMMARY_PATH = ROOT / "results" / "experiment_summary.json"
 OUT = ROOT / "figures_scaled"
 OUT.mkdir(parents=True, exist_ok=True)
 
 CONDS = ["B0", "B1", "P1", "P2", "P3", "P4", "P5"]
 BONFERRONI_ALPHA = 0.05 / 21
 
-# Colorblind-friendly, matches request: B0 grey, B1 orange, P1–P3 teal shades,
+# Colorblind-friendly, matches request: B0 grey, B1 orange, P1â€“P3 teal shades,
 # P4 red, P5 purple.
 COLORS = {
     "B0": "#6B6B6B",
@@ -222,7 +222,7 @@ def fig2_cost_accuracy(cost: pd.DataFrame) -> Path:
             linewidth=1.0,
             linestyle="--",
             zorder=1,
-            label="Pareto frontier (P1–P3, P5)",
+            label="Pareto frontier (P1â€“P3, P5)",
         )
     )
 
@@ -278,7 +278,7 @@ def fig2_cost_accuracy(cost: pd.DataFrame) -> Path:
 
     ax.set_xlabel("Average cost per question (USD)")
     ax.set_ylabel("Pass rate (%)")
-    ax.set_title("Cost–accuracy trade-off", pad=8)
+    ax.set_title("Costâ€“accuracy trade-off", pad=8)
     ax.set_ylim(50, 85)
     ax.set_xlim(0.0035, 0.021)
     ax.xaxis.set_major_formatter(mticker.FormatStrFormatter("$%.3f"))
@@ -335,7 +335,7 @@ def fig3_latency(summary: dict) -> Path:
         ax.text(
             i,
             vals[i] * 1.12,
-            "3× tail",
+            "3Ã— tail",
             ha="center",
             va="bottom",
             fontsize=8.5,
@@ -403,7 +403,7 @@ def fig4_stage_heatmap(stages: pd.DataFrame) -> Path:
     fig.text(
         0.5,
         -0.02,
-        "P1–P3 shift failures from Synthesizer to Formatter, indicating tool-grounded\n"
+        "P1â€“P3 shift failures from Synthesizer to Formatter, indicating tool-grounded\n"
         "checks catch draft errors but formatting remains a residual failure mode.",
         ha="center",
         va="top",
@@ -421,7 +421,7 @@ def fig4_stage_heatmap(stages: pd.DataFrame) -> Path:
 def fig5_p4_confusion(summary: dict) -> Path:
     conf = summary.get("p4_verifier_confusion") or {}
     accept = conf.get("ACCEPT", {"correct": 0, "incorrect": 0})
-    # Collapse all non-ACCEPT decisions into REJECT for a clean 2×2
+    # Collapse all non-ACCEPT decisions into REJECT for a clean 2Ã—2
     reject_correct = 0
     reject_incorrect = 0
     for key, block in conf.items():
@@ -431,8 +431,8 @@ def fig5_p4_confusion(summary: dict) -> Path:
         reject_incorrect += int(block.get("incorrect", 0))
 
     # Rows: Verifier decision; Cols: Actual Correct / Incorrect
-    # [[ACCEPT∩Correct, ACCEPT∩Incorrect],
-    #  [REJECT∩Correct, REJECT∩Incorrect]]
+    # [[ACCEPTâˆ©Correct, ACCEPTâˆ©Incorrect],
+    #  [REJECTâˆ©Correct, REJECTâˆ©Incorrect]]
     matrix = np.array(
         [
             [int(accept.get("correct", 0)), int(accept.get("incorrect", 0))],

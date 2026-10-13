@@ -1,6 +1,10 @@
-langgraph>=0.2.0
-langchain-core>=0.3.0
-anthropic>=0.40.0
-python-dotenv>=1.0.0
-matplotlib>=3.8.0
-datasets>=2.19.0
+langgraph==1.0.10
+langchain-core==1.2.16
+anthropic==0.84.0
+python-dotenv==1.2.2
+matplotlib==3.10.8
+datasets==4.8.4
+numpy==2.3.5
+pandas==2.3.3
+scipy==1.17.1
+statsmodels==0.14.6

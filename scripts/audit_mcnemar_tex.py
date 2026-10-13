@@ -8,9 +8,9 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-JSON = ROOT / "results_scaled" / "stats" / "paired_question_tests.json"
-SUMMARY = ROOT / "results_scaled" / "stats" / "statistical_summary.md"
-CSV = ROOT / "results_scaled" / "stats" / "paired_question_highlight.csv"
+JSON = ROOT / "results" / "stats" / "paired_question_tests.json"
+SUMMARY = ROOT / "results" / "stats" / "statistical_summary.md"
+CSV = ROOT / "results" / "stats" / "paired_question_highlight.csv"
 TEX = ROOT / "overleaf_neurips" / "main.tex"
 
 # LaTeX uses \times; values must match JSON within rounding

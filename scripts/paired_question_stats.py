@@ -1,4 +1,4 @@
-"""Question-level paired pass-rate tests (150 Hotpot questions × 3 trials)."""
+"""Question-level paired pass-rate tests (150 Hotpot questions Ã— 3 trials)."""
 
 from __future__ import annotations
 
@@ -12,8 +12,8 @@ from scipy import stats
 from statsmodels.stats.contingency_tables import mcnemar
 
 ROOT = Path(__file__).resolve().parents[1]
-CSV = ROOT / "results_scaled" / "question_outcomes.csv"
-OUT = ROOT / "results_scaled" / "stats" / "paired_question_tests.json"
+CSV = ROOT / "results" / "question_outcomes.csv"
+OUT = ROOT / "results" / "stats" / "paired_question_tests.json"
 CONDS = ["B0", "B1", "P1", "P2", "P3", "P4", "P5"]
 BONF = 0.05 / 21
 
@@ -47,7 +47,7 @@ def question_tables(df: pd.DataFrame) -> dict[str, pd.DataFrame]:
 
 
 def mcnemar_pair(qa: pd.DataFrame, qb: pd.DataFrame) -> dict:
-    """qa/qb are majority tables; Δpp = gain of first condition (qa) over second (qb)."""
+    """qa/qb are majority tables; Î”pp = gain of first condition (qa) over second (qb)."""
     ids = qa.index.intersection(qb.index)
     a = qa.loc[ids, "majority"].astype(bool)
     b = qb.loc[ids, "majority"].astype(bool)
@@ -114,7 +114,7 @@ def main() -> None:
         entry = {**m, **w, "cohen_h_majority": round(cohen_h(pa, pb), 2)}
         entry["sig_bonferroni"] = entry["mcnemar_p"] < BONF
         pairs[f"{a}_vs_{b}"] = entry
-        # reverse direction: flip Δpp / h, same p
+        # reverse direction: flip Î”pp / h, same p
         rev = dict(entry)
         rev["delta_pp_majority"] = round(-entry["delta_pp_majority"], 1)
         rev["cohen_h_majority"] = round(-entry["cohen_h_majority"], 2)
